@@ -529,7 +529,7 @@ $('nav').innerHTML=T.tabs.map((t,i)=>`<button class="tb${i===0?' on':''}" data-p
 let pg=$('pg'),html='';
 
 /* HOME */
-html+=`<div class="pg on" id="p-home"><div style="text-align:center;padding:40px 0 24px"><div class="sv" style="font-size:42px;color:var(--a);margin-bottom:16px">🇲</div><div style="font-size:32px;font-weight:800;margin-bottom:8px">${T.hero_t}</div><div style="font-size:18px;color:var(--td);max-width:600px;margin:0 auto 24px">${T.hero_d}</div><button class="btn bp" onclick="show('calc',document.querySelectorAll('.tb')[1])" style="font-size:18px;padding:16px 40px">${T.hero_b}</button></div>`;
+html+=`<div class="pg on" id="p-home"><div style="text-align:center;padding:40px 0 24px"><div class="sv" style="font-size:42px;margin-bottom:16px">🇲🇾</div><div style="font-size:32px;font-weight:800;margin-bottom:8px">${T.hero_t}</div><div style="font-size:18px;color:var(--td);max-width:600px;margin:0 auto 24px">${T.hero_d}</div><button class="btn bp" onclick="show('calc',document.querySelectorAll('.tb')[1])" style="font-size:18px;padding:16px 40px">${T.hero_b}</button></div>`;
 html+=`<div class="g4" style="margin-bottom:24px">`;
 html+=mkStat(T.s1,T.s1v,T.s1c),html+=mkStat(T.s2,T.s2v,T.s2c),html+=mkStat(T.s3,T.s3v,T.s3c),html+=mkStat(T.s4,T.s4v,T.s4c);
 html+=`</div><div class="g2"><div class="cd"><div class="ct">${T.trend}</div><div class="bars" style="margin-top:16px">`;
