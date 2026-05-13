@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -70,8 +70,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC','Not
 const LS={en:'🇬🇧 English',bm:'🇲🇾 Bahasa Melayu',zh:'🇨🇳 中文',ta:'🇮🇳 தமிழ்'};
 let L=localStorage.getItem('kl-lang')||'en';
 const $=id=>document.getElementById(id);
-
-function T(s){return _(L,s)||s}
+function T(s){return(_T[L]&&_T[L][s])||_T.en[s]||s}
 const _T={
 en:{
 logo:"Kembali<small>Malaysia Retrenchment Toolkit</small>",
@@ -103,7 +102,7 @@ f_ex:"Monthly expenses (RM)",
 f_hx:"Rent, food, insurance, loans — all monthly costs.",
 f_dp:"Dependants",f_st:"State",
 cb:"📊 Calculate Payout & Financial Plan",
-r_t:"📊 Your Financial Summary",
+r_t:"📊 Your Financial Summary",r_ctx:"📋 Calculation Context",
 r_ttl:"TOTAL PAYOUT",r_sev:"SEVERANCE",r_eis:"SOCSO / EIS",r_epf:"EPF (Akaun 2)",r_not:"NOTICE PAY",r_exp:"MONTHLY COSTS",r_run:"FINANCIAL RUNWAY",
 r_u:"⚠️ Urgent",r_c:"✅ Comfortable",r_m:"Manageable",
 r_brk:"💰 Payout Breakdown",
@@ -168,38 +167,38 @@ p_sev:"Severance",p_eis:"SOCSO/EIS",p_epf:"EPF",p_not:"Notice Pay",
 plan_crit:"🔴 CRITICAL: Less than 3 months runway",
 plan_crit_d:"Cut expenses now. Register MYFutureJobs. HRD Corp reskilling (RM400/month). Try CGC emergency loan.",
 plan_mod:"🟡 Moderate runway — focus on income",
-plan_mod_d:"3-6 months buffer. Job search priority: MYFutureJobs, LinkedIn, JobStreet. SOCSO re-training grants.",
+plan_mod_d:"3-6 months buffer. Job search priority: MYFutureJobs, LinkedIn, JobStreet.",
 plan_ok:"🟢 Healthy runway — plan strategically",
-plan_ok_d:"Use time for upskilling, career shift, or business. Still register MYFutureJobs for leads.",
+plan_ok_d:"Use time for upskilling, career shift, or business.",
 plan_tax:"💰 Your severance is fully tax-exempt",
 plan_tax_d:"Within RM10,000/year of service exemption.",
 plan_srt:"⚠️ Less than 1 year service",
-plan_srt_d:"Limited severance (10 days/yr). Check contract for better rates. File Labour Dept if unfair.",
+plan_srt_d:"Limited severance (10 days/yr). Check contract.",
 plan_dl:"📋 Key deadlines",plan_dd:"• 7 days: All monies from employer\n• 60 days: SOCSO EIS claim\n• Before leaving: EA Form\n• ASAP: MYFutureJobs",
 ch:["Submit SOCSO EIS claim (60 days!)","Register MYFutureJobs","Get EA Form from employer","EPF Akaun 2 withdrawal","Check insurance coverage","Update resume & LinkedIn","Reskilling programmes (HRD Corp)","Review monthly budget"],
 chd:["PERKESO portal with: IC, termination letter, 3 payslips, bank details","myfuturejobs.perkeso.gov.my — Required for EIS","Needed for tax filing. Employer must provide","i-Akaun portal or KWSD branch","May end immediately. Get individual if dependents","Mark 'Open to Work'","Free training + RM400/mo stipend","Cut non-essentials. Prioritize rent/food"]
 },
 bm:{
 logo:"Kembali<small>Toolkit Penampilan Kerja</small>",
-tabs:["🏠 Utama","🧮 Kalkulator","📊 Keputusan","⚖️ Hak","🆘 Bantuan"],
+tabs:["🏠 Utama","🧮 Kalkulator"," Keputusan","⚖️ Hak","🆘 Bantuan"],
 hero_t:"Dibuang Kerja? Anda tidak keseorangan.",
-hero_d:"<b>24,100 pekerja dibuang kerja</b> dalam Q1 2026 (+47% YoY). Kira bayaran penuh anda, fahami hak anda, dan rancang langkah seterusnya.",
+hero_d:"<b>24,100 pekerja dibuang kerja</b> dalam Q1 2026 (+47% YoY). Kira bayaran penuh.",
 hero_b:"Kira Bayaran Saya →",
 s1:"Dibuang Kerja\nQ1 2026",s1v:"24,100",s1c:"r",
 s2:"lawan Q1 2025",s2v:"+47%",s2c:"a",
 s3:"Had akhir\ntuntutan SOCSO/EIS",s3v:"60 hari",s3c:"a",
 s4:"Undang-undang\nbayaran pampasan",s4v:"7 hari",s4c:"g",
 trend:"📈 Trend Pemberhentian (Q1 2026)",
-trend_s:"Sumber: SOCSO / PERKESO. Pembuatan ~51.6% daripada semua pemberhentian.",
+trend_s:"Sumber: SOCSO / PERKESO. Pembuatan ~51.6%.",
 tm:["Januari","Februari","Mac","April (16h)"],tv:[8500,6900,4700,4708],tc:["var(--a)","var(--p)","var(--c)","var(--am)"],
 next:"🎯 Apa Yang Perlu Dilakukan",
-n1t:"Dalam masa 7 hari",n1d:"Majikan mesti bayar faedah pemberhentian (pampasan + gaji tertunggak)",
+n1t:"Dalam masa 7 hari",n1d:"Majikan mesti bayar faedah pemberhentian.",
 n2t:"Dalam masa 60 hari",n2d:"Fail tuntutan SOCSO EIS (Elaun Carian Kerja + Elaun Sementara)",
-n3t:"Secepat mungkin",n3d:"Semak kelayakan pengeluaran KWSP Akaun 2, kemaskini Borang EA untuk cukai",
-n4t:"Berterusan",n4d:"Daftar MYFutureJobs, teroka program latihan semula HRD Corp",
+n3t:"Secepat mungkin",n3d:"Semak kelayakan pengeluaran KWSP Akaun 2.",
+n4t:"Berterusan",n4d:"Daftar MYFutureJobs, teroka HRD Corp.",
 priv:"🔒 <b>Privasi:</b> Alat ini berjalan 100% dalam pelayar. Tiada data dikumpul.",
 calc_t:"🧮 Butiran Pekerjaan Anda",
-calc_d:"Isi sekali — semua 5 kalkulator auto-kira.",
+calc_d:"Isi sekali — semua kalkulator auto-kira.",
 f_sal:"Gaji bulanan terakhir (RM) *",f_yrs:"Tahun perkhidmatan *",f_age:"Umur *",f_not:"Tempoh notis (bulan)",
 f_ct:"Jenis kontrak",f_tt:"Jenis penamatan",
 f_sc:"Pencarum SOCSO / EIS",f_ec:"Ahli KWSP (EPF)",
@@ -209,287 +208,287 @@ f_ex:"Perbelanjaan bulanan (RM)",
 f_hx:"Sewa, makanan, insurans, pinjaman — semua kos bulanan.",
 f_dp:"Tanggungan",f_st:"Negeri",
 cb:"📊 Kira Bayaran & Pelan Kewangan",
-r_t:"📊 Ringkasan Kewangan Anda",
+r_t:"📊 Ringkasan Kewangan Anda",r_ctx:"📋 Konteks Pengiraan",
 r_ttl:"JUMLAH BAYARAN",r_sev:"PAMPASAN",r_eis:"SOCSO / EIS",r_epf:"KWSP (Akaun 2)",r_not:"BAYARAN NOTIS",r_exp:"KOS BULANAN",r_run:"HAD KEWANGAN",
 r_u:"⚠️ Segera",r_c:"✅ Selesa",r_m:"Diurus",
 r_brk:"💰 Pecahan Bayaran",
 r_tl:"📅 Jadual Bayaran",
 r_t1:"Dalam masa 7 hari",r_t1d:"Pampasan + Bayaran Notis",
-r_t2:"~14 hari selepas fail",r_t2d:"Bayaran pertama SOCSO/EIS",
-r_t3:"~14 hari selepas permohonan",r_t3d:"Pengeluaran KWSP Akaun 2",
+r_t2:"~14 hari selepas fail",r_t2d:"SOCSO/EIS pertama",
+r_t3:"~14 hari selepas mohon",r_t3d:"Pengeluaran KWSP Akaun 2",
 r_pl:"📝 Pelan Tindakan",
 r_cl:"✅ Senarai Semak",
 r_sh:"📤 Simpan / Cetak",
-r_shd:"Tangkap layar atau cetak untuk simpan.",
+r_shd:"Tangkap layar atau cetak.",
 r_p:"🖨️ Cetak / Simpan PDF",
 rs_t:"⚖️ Hak Undang-Undang Anda",
 rmp:"📋 Majikan MESTI Bayar",
-m1:"Gaji terkumpul",m1d:"Bayaran penuh sehingga hari terakhir bekerja",
-m2:"Cuti tahunan terkumpul",m2d:"Hari cuti tidak digunakan akan dibayar",
-m3:"Bayaran notis",m3d:"Bayaran ganti jika notis yang betul tidak diberi",
+m1:"Gaji terkumpul",m1d:"Bayaran sehingga hari terakhir.",
+m2:"Cuti tahunan terkumpul",m2d:"Dibayar.",
+m3:"Bayaran notis",m3d:"Bayaran ganti jika tiada notis.",
 m4:"Pampasan (lalai JTAS)",m4d:"0-2 thn: 10 hari/thn\n2-5 thn: 15 hari/thn\n5+ thn: 20 hari/thn",
 dl:"⏰ Had Akhir",
-d1:"7 hari",d1d:"Semua wang tertunggak mesti dibayar",
-d2:"60 hari",d2d:"Tuntutan SOCSO EIS — selepas ini anda hilang kelayakan",
-d3:"Borang EA",d3d:"Minta sebelum keluar — diperlukan untuk cukai",
-d4:"Pertikaian",d4d:"Fail dengan Jabatan Tenaga Kerja jika majikan pertikai",
+d1:"7 hari",d1d:"Semua wang tertunggak.",
+d2:"60 hari",d2d:"Tuntutan SOCSO EIS.",
+d3:"Borang EA",d3d:"Minta sebelum keluar.",
+d4:"Pertikaian",d4d:"Fail dengan JTM.",
 se:"🏛️ SOCSO / EIS",
-se_i:"Jika anda mencarum, anda layak untuk Elaun Carian Kerja + Elaun Sementara (SIP Prihatin).",
-se1:"60-80%\ndaripada gaji",se2:"6 bulan\nmaksimum",se3:"RM 1,360\nhad bulanan",
-se_q:"<b>Kelayakan:</b> 6 daripada 12 bulan terakhir SOCSO. Umur ≤60. Mesti daftar MYFutureJobs.",
+se_i:"Anda layak Elaun Carian Kerja + Sementara.",
+se1:"60-80%\ngaji",se2:"6 bulan\nmax",se3:"RM 1,360\nhad",
+se_q:"<b>Kelayakan:</b> 6/12 bulan SOCSO. Umur ≤60. Daftar MYFutureJobs.",
 ep:"💰 KWSP & Cukai",
-ep1:"<b>KWSP Akaun 2:</b> Pekerja yang diberhentikan boleh memohon pengeluaran awal.",
-ep2:"<b>TIDAK kena cukai:</b> RM10,000 pertama/tahun perkhidmatan dikecualikan selepas 1999.",
+ep1:"<b>KWSP Akaun 2:</b> Pengeluaran awal.",
+ep2:"<b>TIDAK kena cukai:</b> RM10,000/thn dikecualikan.",
 cv:"⚠️ Berhati-hati",
-cv1:"'Tiada dasar pampasan' — kadar lalai JTAS masih terpakai",
-cv2:"Disenarai sebagai 'kontraktor' untuk elak SOCSO — semak status",
-cv3:"Potongan daripada pampasan — hanya untuk KWSP/cukai/perintah mahkamah",
-cv4:"Tiada bayaran dalam 7 hari — fail aduan Jabatan Tenaga Kerja",
-cv5:"'Pemisahan bersama' — jangan tandatangan tanpa fahami terma",
+cv1:"'Tiada dasar' — JTAS terpakai.",
+cv2:"'Kontraktor' untuk elak SOCSO.",
+cv3:"Potongan — hanya KWSP/cukai/mahkamah.",
+cv4:"Tiada bayar 7 hari — fail JTM.",
+cv5:"'Pemisahan bersama' — fahami terma.",
 he_t:"🆘 Bantuan & Sumber",
 gh:"📞 Hotline Kerajaan",
-gh1:"SOCSO / PERKESO",gh1d:"1-300-22-8000 (24/7 Jun 2026)",
-gh2:"JTM (Jabatan Tenaga Kerja)",gh2d:"1-300-88-5555",
-gh3:"Talian Kasih",gh3d:"15999 (24 jam)",
+gh1:"SOCSO / PERKESO",gh1d:"1-300-22-8000",
+gh2:"JTM",gh2d:"1-300-88-5555",
+gh3:"Talian Kasih",gh3d:"15999",
 gh4:"Befrienders",gh4d:"03-7627 2929",
-jm:"💼 Pekerjaan & Latihan Semula",
-jm1:"MYFutureJobs",jm1d:"Portal rasmi PERKESO. Diperlukan untuk EIS.",
-jm2:"HRD Corp",jm2d:"Geran latihan percuma. Elaun RM400/bln.",
-jm3:"PERKESO",jm3d:"Fail tuntutan EIS, akses SOERMA.",
-dv:"📄 Dokumen Diperlukan",
-dc:["Borang EA (dari majikan)","Penyata KWSP i-Akaun","Surat pemberhentian","3 penyata gaji terakhir","Salinan IC / MyKad","Butiran bank"],
-dd:["Borang cukai tahunan","Menunjukkan baki KWSP","Bukti pemberhentian rasmi","Untuk pengesahan gaji SOCSO","Untuk ID SOCSO","Untuk simpanan pembayaran"],
-cr:"📊 Sumber Komuniti",
-cr1:"CGC Persekutuan",cr1d:"Pinjaman kadar rendah untuk pekerja diberhentikan",
-cr2:"Program AKRAB",cr2d:"Sokongan peralihan kerjaya PERKESO",
-dp:["Tiada","1 tanggungan","2 tanggungan","3+ tanggungan"],
+jm:"💼 Pekerjaan & Latihan",
+jm1:"MYFutureJobs",jm1d:"Portal rasmi.",
+jm2:"HRD Corp",jm2d:"Geran latihan.",
+jm3:"PERKESO",jm3d:"Fail EIS.",
+dv:"📄 Dokumen",
+dc:["Borang EA","Penyata KWSP","Surat penamatan","3 penyata gaji","IC/MyKad","Bank"],
+dd:["Cukai","Baki KWSP","Bukti","Gaji SOCSO","ID SOCSO","Deposit"],
+cr:"📊 Komuniti",
+cr1:"CGC",cr1d:"Pinjaman.",
+cr2:"AKRAB",cr2d:"Sokongan.",
+dp:["Tiada","1","2","3+"],
 sp:["Kuala Lumpur","Selangor","Johor","Pulau Pinang","Lain-lain"],
-co:["Lalai (JTAS)","Kesatuan / Kolektif","Eksekutif"],
-to:["Pemberhentian / Lebihan Pekerja","Saluk laku / Dipecat","Skim Pemisahan Bersama (MSS)"],
+co:["Lalai (JTAS)","Kesatuan","Eksekutif"],
+to:["Pemberhentian","Saluk laku","Skim Pemisahan (MSS)"],
 days:["Jan","Feb","Mac","Apr"],
 sev_label:"hari/thn ×",yrs_label:"thn",mo:"bulan",mop:"bulan",rm_label:"RM",
 p_sev:"Pampasan",p_eis:"SOCSO/EIS",p_epf:"KWSP",p_not:"Bayaran Notis",
-plan_crit:"🔴 KRITIKAL: Kurang daripada 3 bulan",
-plan_crit_d:"Potong perbelanjaan sekarang. Daftar MYFutureJobs. Latihan semula HRD Corp (RM400/bln). Cuba pinjaman kecemasan CGC.",
-plan_mod:"🟡 Sederhana — fokus pendapatan",
-plan_mod_d:"Buffer 3-6 bulan. Keutamaan carian kerja: MYFutureJobs, LinkedIn, JobStreet.",
-plan_ok:"🟢 Tempoh selesa — rancang strategik",
-plan_ok_d:"Guna masa untuk naik taraf kemahiran, alih kerjaya, atau perniagaan. Tetap daftar MYFutureJobs.",
-plan_tax:"💰 Pampasan anda dikecualikan cukai sepenuhnya",
-plan_tax_d:"Dalam had pengecualian RM10,000/tahun perkhidmatan.",
-plan_srt:"⚠️ Kurang daripada 1 tahun perkhidmatan",
-plan_srt_d:"Pampasan terhad (10 hari/thn). Semak kontrak. Fail Jabatan TK jika tidak adil.",
-plan_dl:"📌 Had akhir penting",plan_dd:"• 7 hari: Semua wang dari majikan\n• 60 hari: Tuntutan SOCSO EIS\n• Sebelum keluar: Borang EA\n• Segera: MYFutureJobs",
-ch:["Fail tuntutan SOCSO EIS (60 hari!)","Daftar MYFutureJobs","Dapatkan Borang EA dari majikan","Pengeluaran KWSP Akaun 2","Semak perlindungan insurans","Kemaskini resume & LinkedIn","Program latihan semula (HRD Corp)","Semak bajet bulanan"],
-chd:["Portal PERKESO dengan: IC, surat penamatan, 3 penyata gaji, butiran bank","myfuturejobs.perkeso.gov.my — Diperlukan untuk EIS","Diperlukan untuk fail cukai. Majikan mesti beri","Portal i-Akaun atau cawangan KWSP","Mungkin tamat serta-merta","Tandakan 'Open to Work'","Latihan percuma + elaun RM400/bln","Potong bukan penting. Utamakan sewa/makan"]
+plan_crit:"🔴 KRITIKAL: Kurang 3 bulan",
+plan_crit_d:"Potong belanja. Daftar MYFutureJobs.",
+plan_mod:"🟡 Sederhana: 3-6 bulan",
+plan_mod_d:"Carian kerja.",
+plan_ok:"🟢 Selesa",
+plan_ok_d:"Skil atau bisnes.",
+plan_tax:"💰 Cukai: Dikecualikan",
+plan_tax_d:"Dalam had RM10k/thn.",
+plan_srt:"⚠️ Kurang 1 tahun",
+plan_srt_d:"Pampasan terhad.",
+plan_dl:"📌 Had akhir",plan_dd:"• 7 hari: Wang tertunggak\n• 60 hari: SOCSO EIS\n• EA Form\n• MYFutureJobs",
+ch:["Fail SOCSO EIS","Daftar MYFutureJobs","Dapatkan EA","Pengeluaran KWSP","Semak insurans","Update Resume & LinkedIn","Latihan HRD Corp","Semak bajet"],
+chd:["Portal PERKESO","myfuturejobs.perkeso.gov.my","Cukai","i-Akaun","Perlindungan","Tandakan Open to Work","Latihan","Bajet"]
 },
 zh:{
-logo:"Kembali<small>马来西亚裁员援助工具</small>",
+logo:"Kembali<small>裁员援助工具</small>",
 tabs:["🏠 首页","🧮 计算器","📊 结果","⚖️ 权益","🆘 帮助"],
-hero_t:"被裁退了？你不是一个人。",
-hero_d:"2026年第一季度有 <b>24,100 名工人被裁员</b>（同比增长47%）。一站式计算您的全部补偿、了解您的权益、规划下一步。",
-hero_b:"计算我的赔偿 →",
-s1:"2026 Q1 裁员人数",s1v:"24,100",s1c:"r",
-s2:"同比 2025 Q1",s2v:"+47%",s2c:"a",
-s3:"SOCSO/EIS\n索赔期限",s3v:"60天",s3c:"a",
-s4:"遣散费\n支付法定期限",s4v:"7天",s4c:"g",
-trend:"📈 裁员趋势（2026年第一季度）",
-trend_s:"来源：SOCSO / PERKESO。制造业占裁员的约51.6%。",
-tm:["一月","二月","三月","四月（16天）"],tv:[8500,6900,4700,4708],tc:["var(--a)","var(--p)","var(--c)","var(--am)"],
-next:"🎯 接下来该做什么",
-n1t:"7天内",n1d:"雇主依法必须支付遣散费（遣散费+工资欠款）",
-n2t:"60天内",n2d:"提交 SOCSO EIS 索赔（求职津贴+临时津贴）",
-n3t:"尽快",n3d:"检查 EPF 第二提款资格，更新 EA 表格",
-n4t:"持续进行",n4d:"注册 MYFutureJobs，探索 HRD Corp 培训计划",
-priv:"🔒 <b>隐私保护：</b>本工具100%在浏览器运行，不收集任何数据。",
-calc_t:"🧮 您的就业信息",
-calc_d:"填写一次 — 5个计算器自动计算。",
-f_sal:"最后月薪（RM）*",f_yrs:"服务年限*",f_age:"年龄*",f_not:"通知期（月）",
+hero_t:"您不是一个人。",
+hero_d:"2026 Q1 <b>24,100 人</b>被裁。计算赔偿，了解权益。",
+hero_b:"计算赔偿 →",
+s1:"Q1 裁员人数",s1v:"24,100",s1c:"r",
+s2:"同比 Q1 2025",s2v:"+47%",s2c:"a",
+s3:"SOCSO/EIS\n期限",s3v:"60天",s3c:"a",
+s4:"支付\n法定期限",s4v:"7天",s4c:"g",
+trend:"📈 趋势 (Q1 2026)",
+trend_s:"来源：SOCSO / PERKESO。",
+tm:["一月","二月","三月","四月"],tv:[8500,6900,4700,4708],tc:["var(--a)","var(--p)","var(--c)","var(--am)"],
+next:"🎯 接下来",
+n1t:"7天内",n1d:"雇主必须支付.",
+n2t:"60天内",n2d:"提交 SOCSO EIS.",
+n3t:"尽快",n3d:"检查 EPF.",
+n4t:"持续",n4d:"注册 MYFutureJobs.",
+priv:"🔒 <b>隐私：</b>100% 浏览器运行。",
+calc_t:"🧮 您的信息",
+calc_d:"填写一次 — 自动计算。",
+f_sal:"月薪 (RM) *",f_yrs:"服务年限 *",f_age:"年龄 *",f_not:"通知期 (月)",
 f_ct:"合约类型",f_tt:"终止类型",
-f_sc:"SOCSO / EIS 供款人",f_ec:"EPF（KWSP）会员",
-f_b:"EPF 第二户口余额（RM）",
-f_hb:"在 kwsp.gov.my 查询。留空使用估算。",
-f_ex:"每月生活费（RM）",
-f_hx:"房租、食物、保险、贷款 — 所有月费",
+f_sc:"SOCSO / EIS",f_ec:"EPF 会员",
+f_b:"EPF 余额 (RM)",
+f_hb:"kwsp.gov.my 查询。",
+f_ex:"月支出 (RM)",
+f_hx:"房租，食物，保险.",
 f_dp:"受抚养人",f_st:"州属",
-cb:"📊 计算全部赔偿与财务计划",
-r_t:"📊 您的财务摘要",
-r_ttl:"总赔偿",r_sev:"遣散费",r_eis:"SOCSO / EIS",r_epf:"EPF（第二户口）",r_not:"通知期工资",r_exp:"月支出",r_run:"财务缓冲期",
+cb:"📊 计算",
+r_t:"📊 财务摘要",r_ctx:"📋 背景",
+r_ttl:"总额",r_sev:"遣散费",r_eis:"SOCSO",r_epf:"EPF",r_not:"通知费",r_exp:"月支出",r_run:"缓冲期",
 r_u:"⚠️ 紧急",r_c:"✅ 充裕",r_m:"可管理",
-r_brk:"💰 赔偿明细",
-r_tl:"📅 付款时间线",
-r_t1:"7天内",r_t1d:"遣散费 + 通知期工资",
-r_t2:"提交后约14天",r_t2d:"SOCSO/EIS 首次付款",
-r_t3:"申请后约14天",r_t3d:"EPF 第二户口提款",
-r_pl:"📝 个人行动计划",
-r_cl:"✅ 个人清单",
-r_sh:"📤 保存 / 打印",
-r_shd:"截图或打印以保存。",
-r_p:"🖨️ 打印 / 保存PDF",
-rs_t:"⚖️ 您的法律权益",
-rmp:"📋 雇主必须支付",
-m1:"应计工资",m1d:"工作到最后一天的全额工资",
-m2:"应计年假",m2d:"未使用的年假必须折现",
-m3:"通知期工资",m3d:"如未给予适当通知，须支付代通知金",
-m4:"遣散费（JTAS标准）",m4d:"0-2年：每年10天\n2-5年：每年15天\n5年以上：每年20天",
-dl:"⏰ 重要期限",
-d1:"7天",d1d:"所有欠款必须付清",
-d2:"60天",d2d:"SOCSO EIS 索赔 — 过期将失去资格",
-d3:"EA 表格",d3d:"离职前必须索取 — 用于报税",
-d4:"申诉",d4d:"如雇主争议，向劳工部投诉",
-se:"🏛️ SOCSO / EIS（就业保险制度）",
-se_i:"如果您有供款，您有资格获得求职津贴和临时津贴（SIP Prihatin）。",
-se1:"工资的\n60-80%",se2:"最多\n6个月",se3:"RM 1,360\n月上限",
-se_q:"<b>资格条件：</b>过去12个月中至少有6个月供款。年龄≤60岁。必须注册MYFutureJobs。",
-ep:"💰 EPF（KWSP）与税务",
-ep1:"<b>EPF 第二户口：</b>被裁员工可申请提前取款。",
-ep2:"<b>不征税：</b>1999年后，每服务年首RM10,000免税。",
+r_brk:"💰 明细",
+r_tl:"📅 时间线",
+r_t1:"7天内",r_t1d:"遣散 + 通知",
+r_t2:"~14天",r_t2d:"首次 SOCSO",
+r_t3:"~14天",r_t3d:"EPF 提款",
+r_pl:"📝 计划",
+r_cl:"✅ 清单",
+r_sh:"📤 保存/打印",
+r_shd:"截图保存。",
+r_p:"🖨️ 打印 PDF",
+rs_t:"⚖️ 权益",
+rmp:"📋 雇主需支付",
+m1:"应计工资",m1d:"全额.",
+m2:"年假",m2d:"折现.",
+m3:"通知费",m3d:"代通知金.",
+m4:"遣散费 (JTAS)",m4d:"0-2年: 10天/年\n2-5年: 15天/年\n5+年: 20天/年",
+dl:"⏰ 期限",
+d1:"7天",d1d:"全付.",
+d2:"60天",d2d:"SOCSO EIS.",
+d3:"EA 表",d3d:"税务用.",
+d4:"争议",d4d:"劳工部.",
+se:"🏛️ SOCSO / EIS",
+se_i:"求职津贴 + 临时津贴.",
+se1:"60-80%\n工资",se2:"6个月\nmax",se3:"RM 1,360\n月上限",
+se_q:"<b>条件：</b>6/12月供款。≤60岁。注册MYFutureJobs.",
+ep:"💰 EPF & 税",
+ep1:"<b>EPF：</b>提前取款.",
+ep2:"<b>免税：</b>RM10,000/年免税.",
 cv:"⚠️ 注意",
-cv1:"雇主说'没有遣散政策' — JTAS默认标准仍依法适用",
-cv2:"被归类为'承包商'以规避SOCSO — 检查您的雇佣状态",
-cv3:"从遣散费扣款 — 只能扣EPF/税/法院命令",
-cv4:"7天内未付款 — 立即向劳工部投诉",
-cv5:"'共同分离' — 不了解条款不要签字",
-he_t:"🆘 帮助与资源",
-gh:"📞 政府热线",
-gh1:"SOCSO / PERKESO",gh1d:"1-300-22-8000（2026年6月起24小时）",
-gh2:"劳工部（JTM）",gh2d:"1-300-88-5555",
-gh3:"Talian Kasih",gh3d:"15999（24小时）",
+cv1:"'无政策' — JTAS 适用.",
+cv2:"'承包商' — 检查状态.",
+cv3:"扣款 — 仅 EPF/税.",
+cv4:"7天未付 — 投诉.",
+cv5:"'共同分离' — 理解条款.",
+he_t:"🆘 帮助",
+gh:"📞 热线",
+gh1:"SOCSO",gh1d:"1-300-22-8000",
+gh2:"JTM",gh2d:"1-300-88-5555",
+gh3:"Talian Kasih",gh3d:"15999",
 gh4:"Befrienders",gh4d:"03-7627 2929",
-jm:"💼 求职与培训",
-jm1:"MYFutureJobs",jm1d:"PERKESO 官方求职平台。EIS 必要条件。",
-jm2:"HRD Corp",jm2d:"免费培训津贴。培训期间RM400/月补助。",
-jm3:"PERKESO",jm3d:"提交 EIS 索赔，使用 SOERMA 服务。",
-dv:"📄 需要准备的文件",
-dc:["EA 表格（雇主提供）","EPF i-Akaun 报表","裁员信","最近3个月工资单","身份证 / MyKad","银行资料"],
-dd:["年度税务表格","显示您的 EPF 余额","正式裁员证明","SOCSO 工资验证","SOCSO 身份验证","用于收款"],
-cr:"📊 社区资源",
-cr1:"联邦信贷担保公司（CGC）",cr1d:"为被裁员工提供低息个人贷款",
-cr2:"AKRAB 计划",cr2d:"PERKESO 职业转型支持",
-dp:["无","1人","2人","3人以上"],
+jm:"💼 工作",
+jm1:"MYFutureJobs",jm1d:"官方.",
+jm2:"HRD Corp",jm2d:"津贴.",
+jm3:"PERKESO",jm3d:"EIS.",
+dv:"📄 文件",
+dc:["EA表","KWSP报表","辞退信","工资单","身份证","银行"],
+dd:["税务","余额","证明","SOCSO","ID","存款"],
+cr:"📊 社区",
+cr1:"CGC",cr1d:"贷款.",
+cr2:"AKRAB",cr2d:"转型.",
+dp:["无","1","2","3+"],
 sp:["吉隆坡","雪兰莪","柔佛","槟城","其他"],
-co:["默认（JTAS）","工会 / 集体协议","高管"],
-to:["裁员 / 岗位冗余","表现不佳 / 被解雇","共同分离计划（MSS）"],
-days:["一月","二月","三月","四月"],
+co:["默认 (JTAS)","工会","高管"],
+to:["裁员","被解雇","共同分离 (MSS)"],
+days:["1月","2月","3月","4月"],
 sev_label:"天/年 ×",yrs_label:"年",mo:"个月",mop:"个月",rm_label:"RM",
-p_sev:"遣散费",p_eis:"SOCSO/EIS",p_epf:"EPF",p_not:"通知期工资",
-plan_crit:"🔴 危急：财务缓冲期不足3个月",
-plan_crit_d:"立即削减非必要开支。注册MYFutureJobs。HRD Corp培训（RM400/月）。尝试CGC紧急贷款。",
-plan_mod:"🟡 中等 — 优先找收入",
-plan_mod_d:"3-6个月缓冲期。求职优先：MYFutureJobs、LinkedIn、JobStreet。",
-plan_ok:"🟢 充裕 — 策略性规划",
-plan_ok_d:"利用时间提升技能、转行或创业。仍建议注册MYFutureJobs获取职位信息。",
-plan_tax:"💰 您的遣散费完全免税",
-plan_tax_d:"在 RM10,000/年服务免税范围内。",
-plan_srt:"⚠️ 服务不满1年",
-plan_srt_d:"遣散费有限（10天/年）。查看合同是否有更高标准。如不公平可向劳工部申请。",
-plan_dl:"📋 重要期限",plan_dd:"• 7天：所有雇主应付款项\n• 60天：SOCSO EIS 索赔\n• 离职前：EA 表格\n• 尽快：MYFutureJobs",
-ch:["提交 SOCSO EIS 索赔（60天内）","注册 MYFutureJobs","向雇主索取 EA 表格","申请 EPF 第二户口提款","检查保险/医疗保障状态","更新简历与 LinkedIn","培训计划（HRD Corp）","审视月度预算"],
-chd:["PERKESO 网站：身份证、裁员信、3个月工资单、银行资料","myfuturejobs.perkeso.gov.my — EIS 必需","报税必需，雇主必须提供","i-Akaun 网站或 KWSP 分行","可能立即终止","标记'Open to Work'","免费培训 + RM400/月补助","削减非必要开支，优先房租/食物"]
+p_sev:"遣散费",p_eis:"SOCSO",p_epf:"EPF",p_not:"通知费",
+plan_crit:"🔴 危急：<3个月",
+plan_crit_d:"削减开支。注册。",
+plan_mod:"🟡 中等：3-6个月",
+plan_mod_d:"找工作。",
+plan_ok:"🟢 充裕",
+plan_ok_d:"提升技能。",
+plan_tax:"💰 免税",
+plan_tax_d:"RM10k/年.",
+plan_srt:"⚠️ <1年",
+plan_srt_d:"有限。",
+plan_dl:"📋 期限",plan_dd:"• 7天：全付\n• 60天：SOCSO\n• EA表\n• MYFutureJobs",
+ch:["索赔 SOCSO (60天)","注册 MYFutureJobs","拿 EA 表","申请 EPF 提款","保险","更新简历","培训 HRD Corp","预算"],
+chd:["PERKESO 网站","myfuturejobs.perkeso.gov.my","税务","i-Akaun","保障","Open to Work","免费","削减"]
 },
 ta:{
-logo:"Kembali<small>மலேசிய பணிநீக்க உதவி</small>",
+logo:"Kembali<small>பணிநீக்க உதவி</small>",
 tabs:["🏠 முகப்பு","🧮 கால்குலேட்டர்","📊 முடிவுகள்","⚖️ உரிமைகள்","🆘 உதவி"],
-hero_t:"பணிநீக்கம் செய்யப்பட்டீர்களா? நீங்கள் தனியல்ல.",
-hero_d:"2026 Q1-ல் <b>24,100 தொழிலாளர்கள் பணிநீக்கம்</b> (YoY +47%). உங்கள் முழு தொகை, உரிமைகள், அடுத்த கட்டம் — அனைத்தும் ஒரே இடத்தில்.",
-hero_b:"எனது தொகை கணக்கிடு →",
-s1:"பணிநீக்கம்\nQ1 2026",s1v:"24,100",s1c:"r",
-s2:"Q1 2025 vs",s2v:"+47%",s2c:"a",
-s3:"SOCSO/EIS\nகடைசி தேதி",s3v:"60 நாட்கள்",s3c:"a",
-s4:"ஊதிய\nசட்ட தேதி",s4v:"7 நாட்கள்",s4c:"g",
-trend:"📈 பணிநீக்க போக்குகள் (Q1 2026)",
-trend_s:"மூலம்: SOCSO / PERKESO. உற்பத்தி துறை ~51.6% பணிநீக்கம்.",
-tm:["ஜனவரி","பிப்ரவரி","மார்ச்","ஏப்ரல் (16நா)"],tv:[8500,6900,4700,4708],tc:["var(--a)","var(--p)","var(--c)","var(--am)"],
-next:"🎯 அடுத்து என்ன செய்ய வேண்டும்",
-n1t:"7 நாட்களுக்குள்",n1d:"முதலாளி பணிநீக்க பலன்கள் கட்டாயமாக செலுத்த வேண்டும்",
-n2t:"60 நாட்களுக்குள்",n2d:"SOCSO EIS உரிமை கோரல் (வேலை தேடு + தற்காலிகப் படி)",
-n3t:"விரைவாக",n3d:"EPF கணக்கு 2 திரும்பப் பெற தகுதி சரிபார்க்கவும்",
-n4t:"தொடர்ந்து",n4d:"MYFutureJobs பதிவு செய்யவும், HRD Corp மறுபயிற்சி",
-priv:"🔒 <b>தனியுரிமை:</b> இந்த கருவி உங்கள் உலாவியில் 100% இயங்குகிறது. எந்த தரவும் சேகரிக்கப்படவில்லை.",
-calc_t:"🧮 உங்கள் வேலை விவரங்கள்",
-calc_d:"ஒரு முறை நிரப்பவும் — 5 கால்குலேட்டர்கள் தானாக கணக்கிடும்.",
-f_sal:"கடைசி மாத சம்பளம் (RM) *",f_yrs:"சேவை ஆண்டுகள் *",f_age:"வயது *",f_not:"அறிவிப்பு காலம் (மாதங்கள்)",
-f_ct:"ஒப்பந்த வகை",f_tt:"முடிவு வகை",
-f_sc:"SOCSO / EIS பங்களிப்பாளர்",f_ec:"EPF (KWSP) உறுப்பினர்",
-f_b:"EPF கணக்கு 2 இருப்பு (RM)",
-f_hb:"kwsp.gov.my-ல் சரிபார்க்கவும். மதிப்பீட்டிற்கு காலியாக விடவும்.",
-f_ex:"மாத செலவுகள் (RM)",
-f_hx:"வாடகை, உணவு, காப்பீடு, கடன் — அனைத்து மாத செலவுகள்.",
-f_dp:"ஆதரவு",f_st:"மாநிலம்",
-cb:"📊 முழு தொகை & நிதி திட்டம்",
-r_t:"📊 உங்கள் நிதி சுருக்கம்",
-r_ttl:"மொத்தத் தொகை",r_sev:"பணிநீக்க ஊதியம்",r_eis:"SOCSO / EIS",r_epf:"EPF (கணக்கு 2)",r_not:"அறிவிப்பு ஊதியம்",r_exp:"மாத செலவு",r_run:"நிதி ஓட்டகம்",
-r_u:"⚠️ அவசரம்",r_c:"✅ வசதி",r_m:"மேலாளக்கூடியது",
+hero_t:"நீங்கள் தனியல்ல.",
+hero_d:"2026 Q1 <b>24,100 பேர்</b> பணிநீக்கம். உரிமைகளை அறியவும்.",
+hero_b:"கணக்கிடு →",
+s1:"பணிநீக்கம் Q1 2026",s1v:"24,100",s1c:"r",
+s2:"vs Q1 2025",s2v:"+47%",s2c:"a",
+s3:"SOCSO/EIS\nதேதி",s3v:"60 நாட்கள்",s3c:"a",
+s4:"சட்ட தேதி",s4v:"7 நாட்கள்",s4c:"g",
+trend:"📈 போக்குகள்",
+trend_s:"SOCSO மூலம்.",
+tm:["ஜன","பிப்","மார்","ஏப்"],tv:[8500,6900,4700,4708],tc:["var(--a)","var(--p)","var(--c)","var(--am)"],
+next:"🎯 அடுத்து",
+n1t:"7 நாட்கள்",n1d:"பலன்கள்.",
+n2t:"60 நாட்கள்",n2d:"EIS கோரல்.",
+n3t:"விரைவாக",n3d:"EPF சரிபார்க்க.",
+n4t:"தொடர்ந்து",n4d:"MYFutureJobs.",
+priv:"🔒 <b>தனியுரிமை:</b> உலாவியில் இயங்கும்.",
+calc_t:"🧮 விவரங்கள்",
+calc_d:"ஒரு முறை நிரப்பவும்.",
+f_sal:"சம்பளம் (RM) *",f_yrs:"ஆண்டுகள் *",f_age:"வயது *",f_not:"அறிவிப்பு (மாத)",
+f_ct:"வகை",f_tt:"முடிவு",
+f_sc:"SOCSO / EIS",f_ec:"EPF",
+f_b:"EPF இருப்பு (RM)",
+f_hb:"kwsp.gov.my.",
+f_ex:"செலவுகள் (RM)",
+f_hx:"வாடகை, உணவு.",
+f_dp:"ஆதாரம்",f_st:"மாநிலம்",
+cb:"📊 கணக்கிடு",
+r_t:"📊 சுருக்கம்",r_ctx:"📋 சூழல்",
+r_ttl:"மொத்தம்",r_sev:"ஊதியம்",r_eis:"SOCSO",r_epf:"EPF",r_not:"அறிவிப்பு",r_exp:"செலவு",r_run:"ஓட்டம்",
+r_u:"⚠️ அவசரம்",r_c:"✅ வசதி",r_m:"மேலாண்மை",
 r_brk:"💰 பாகுபாடு",
-r_tl:"📅 கட்டண நேரக்கோடு",
-r_t1:"7 நாட்களுக்குள்",r_t1d:"பணிநீக்க ஊதியம் + அறிவிப்பு ஊதியம்",
-r_t2:"தாக்கல் ~14 நாட்கள்",r_t2d:"SOCSO/EIS முதல் கட்டணம்",
-r_t3:"விண்ணப்பம் ~14 நாட்கள்",r_t3d:"EPF கணக்கு 2 திரும்பப் பெறுதல்",
-r_pl:"📝 செயல் திட்டம்",
-r_cl:"✅ சரிபார்ப்பு பட்டியல்",
+r_tl:"📅 நேரம்",
+r_t1:"7 நாட்கள்",r_t1d:"ஊதியம் + அறிவிப்பு",
+r_t2:"~14 நாட்கள்",r_t2d:"SOCSO",
+r_t3:"~14 நாட்கள்",r_t3d:"EPF",
+r_pl:"📝 திட்டம்",
+r_cl:"✅ பட்டியல்",
 r_sh:"📤 சேமி / அச்சிடு",
-r_shd:"சேமிக்க ஸ்க்ரீன்ஷாட் அல்லது அச்சிடு.",
-r_p:"🖨️ அச்சிடு / PDF",
-rs_t:"⚖️ உங்கள் சட்ட உரிமைகள்",
-rmp:"📋 முதலாளி கட்டாயமாக செலுத்த வேண்டும்",
-m1:"சேர்ந்த சம்பளம்",m1d:"கடைசி வேலை நாள் வரை முழு சம்பளம்",
-m2:"சேர்ந்த ஆண்டு விடுப்பு",m2d:"பயன்படுத்தாத விடுப்பு நாட்கள் செலுத்தப்படும்",
-m3:"அறிவிப்பு ஊதியம்",m3d:"ரிய அறிவிப்பு இல்லையென்றால் ஊதியம்",
-m4:"பணிநீக்க ஊதியம் (JTAS)",m4d:"0-2 ஆண்டுகள்: 10 நாட்கள்/ஆண்டு\n2-5 ஆண்டுகள்: 15 நாட்கள்/ஆண்டு\n5+ ஆண்டுகள்: 20 நாட்கள்/ஆண்டு",
-dl:"⏰ கடைசி தேதிகள்",
-d1:"7 நாட்கள்",d1d:"அனைத்து கடன்களும் செலுத்தப்பட வேண்டும்",
-d2:"60 நாட்கள்",d2d:"SOCSO EIS உரிமை கோரல் — பிறகு தகுதி இழப்பு",
-d3:"EA படிவம்",d3d:"வெளியேறும் முன் கேளுங்கள் — வரிக்கு தேவை",
-d4:"தகராறு",d4d:"முதலாளி மறுத்தால் தொழில் துறைக்கு புகார்",
-se:"🏛️ SOCSO / EIS",
-se_i:"நீங்கள் பங்களித்திருந்தால், நீங்கள் வேலை தேடு + தற்காலிகப் பயனுக்கு தகுதியுள்ளவர்.",
-se1:"சம்பளத்தின்\n60-80%",se2:"6 மாதங்கள்\nஅதிகபட்சம்",se3:"RM 1,360\nமாத வரம்பு",
-se_q:"<b>தகுதி:</b> கடந்த 12 மாதங்களில் 6 மாதங்கள் SOCSO. வயது ≤60. MYFutureJobs பதிவு அவசியம்.",
+r_shd:"ஸ்க்ரீன்ஷாட்.",
+r_p:"🖨️ PDF",
+rs_t:"⚖️ உரிமைகள்",
+rmp:"📋 செலுத்த வேண்டும்",
+m1:"சம்பளம்",m1d:"முழு.",
+m2:"விடுப்பு",m2d:"பயன்படுத்தாத.",
+m3:"அறிவிப்பு",m3d:"கட்டாயம்.",
+m4:"பணிநீக்கம்",m4d:"0-2: 10 நாட்கள்\n2-5: 15 நாட்கள்\n5+: 20 நாட்கள்",
+dl:"⏰ தேதிகள்",
+d1:"7 நாட்கள்",d1d:"அனைத்தும்.",
+d2:"60 நாட்கள்",d2d:"SOCSO EIS.",
+d3:"EA படிவம்",d3d:"வரி.",
+d4:"தகராறு",d4d:"JTM.",
+se:"🏛️ SOCSO",
+se_i:"பலன் பெறலாம்.",
+se1:"60-80%\nசம்பளம்",se2:"6 மாத\nmax",se3:"RM 1,360\nமாத",
+se_q:"<b>தகுதி:</b> 6/12 மாத. ≤60 வயது.",
 ep:"💰 EPF & வரி",
-ep1:"<b>EPF கணக்கு 2:</b> பணிநீக்க ஊழியர்கள் முன்கூட்டியே திரும்பப் பெறலாம்.",
-ep2:"<b>வரி இல்லை:</b> 1999க்குப் பிறகு, சேவை ஆண்டுக்கு முதல் RM10,000 வரி விலக்கு.",
+ep1:"<b>EPF:</b> முன்கூட்டியே.",
+ep2:"<b>வரி இல்லை:</b> RM10,000/ஆண்டு.",
 cv:"⚠️ கவனம்",
-cv1:"'பணிநீக்க கொள்கை இல்லை' — JTAS இயல்புவாதங்கள் சட்டப்படி பொருந்தும்",
-cv2:"SOCSO தவிர்க்க 'ஒப்பந்ததாரர்' என வகைப்படுத்தப்பட்டது",
-cv3:"பணிநீக்க ஊதியத்திலிருந்து கழிவு — EPF/வரி/நீதிமன்ற ஆணைகள் மட்டுமே",
-cv4:"7 நாட்களில் கட்டணம் இல்லை — உடனடியாக தொழில் துறைக்கு புகார்",
-cv5:"'பரஸ்பர பிரிவினை' — விதிமுறைகள் புரியாமல் கையொப்பமிட வேண்டாம்",
-he_t:"🆘 உதவி & வளங்கள்",
-gh:"📞 அரசு ஹாட்லைன்",
-gh1:"SOCSO / PERKESO",gh1d:"1-300-22-8000 (24/7 ஜூன் 2026)",
-gh2:"தொழில் துறை (JTM)",gh2d:"1-300-88-5555",
-gh3:"Talian Kasih",gh3d:"15999 (24 மணி)",
+cv1:"'கொள்கை இல்லை' — JTAS பொருந்தும்.",
+cv2:"'ஒப்பந்ததாரர்' — சரிபார்க்க.",
+cv3:"கழிவு — EPF/வரி மட்டுமே.",
+cv4:"7 நாட்கள் இல்லை — புகார்.",
+cv5:"'பிரிவினை' — புரிந்து கொள்ள.",
+he_t:"🆘 உதவி",
+gh:"📞 ாட்லைன்",
+gh1:"SOCSO",gh1d:"1-300-22-8000",
+gh2:"JTM",gh2d:"1-300-88-5555",
+gh3:"Talian Kasih",gh3d:"15999",
 gh4:"Befrienders",gh4d:"03-7627 2929",
-jm:"💼 வேலை & மறுபயிற்சி",
-jm1:"MYFutureJobs",jm1d:"அதிகாரப்பூர்வ PERKESO போர்டல். EIS-க்கு அவசியம்.",
-jm2:"HRD Corp",jm2d:"இலவச பயிற்சி மானியம். பயிற்சிக்கு RM400/மாதம்.",
-jm3:"PERKESO",jm3d:"EIS உரிமை கோரல், SOERMA.",
-dv:"📄 தேவையான ஆவணங்கள்",
-dc:["EA படிவம் (முதலாளியிடமிருந்து)","EPF i-Akaun அறிக்கை","பணிநீக்கக் கடிதம்","கடைசி 3 மாத சம்பளப் பட்டியல்","IC / MyKad நகல்","வங்கி விவரங்கள்"],
-dd:["ஆண்டு வரி படிவம்","உங்கள் EPF இருப்பு","அதிகாரப்பூர்வ பணிநீக்க சான்று","SOCSO சம்பள சரிபார்ப்பு","SOCSO அடையாளம்","கட்டண டெபாசிட்"],
-cr:"📊 சமூக வளங்கள்",
-cr1:"CGC கூட்டாட்சி",cr1d:"பணிநீக்க ஊழியர்களுக்கு குறைந்த வட்டி கடன்",
-cr2:"AKRAB திட்டம்",cr2d:"PERKESO தொழில் மாற்ற ஆதரவு",
-dp:["இல்லை","1 ஆதரவு","2 ஆதரவு","3+ ஆதரவு"],
+jm:"💼 வேலை",
+jm1:"MYFutureJobs",jm1d:"அதிகாரப்பூர்வ.",
+jm2:"HRD Corp",jm2d:"மானியம்.",
+jm3:"PERKESO",jm3d:"EIS.",
+dv:"📄 ஆவணங்கள்",
+dc:["EA","KWSP","கடிதம்","சம்பள","IC","வங்கி"],
+dd:["வரி","இருப்பு","ஆதாரம்","SOCSO","அடையாளம்","டெபாசிட்"],
+cr:"📊 வளங்கள்",
+cr1:"CGC",cr1d:"கடன்.",
+cr2:"AKRAB",cr2d:"ஆரோக்கிய.",
+dp:["இல்லை","1","2","3+"],
 sp:["கோலாலம்பூர்","சிலாங்கூர்","ஜொகூர்","பினாங்கு","பிற"],
-co:["இயல்பு (JTAS)","தொழிற்சங்கம் / கூட்டு","நிர்வாகி"],
-to:["பணிநீக்கம் / மிகை ஊழியர்","மோசமான செயல்திறன் / நீக்கம்","பரஸ்பர பிரிவினை திட்டம் (MSS)"],
+co:["இயல்பு","சங்கம்","நிர்வாக"],
+to:["பணிநீக்கம்","நீக்கம்","MSS"],
 days:["ஜன","பிப்","மார்","ஏப்"],
-sev_label:"நாட்கள்/ஆண்டு ×",yrs_label:"ஆண்டு",mo:"மாதம்",mop:"மாதங்கள்",rm_label:"RM",
-p_sev:"பணிநீக்க ஊதியம்",p_eis:"SOCSO/EIS",p_epf:"EPF",p_not:"அறிவிப்பு ஊதியம்",
-plan_crit:"🔴 முக்கியம்: 3 மாதங்களுக்கு கீழே",
-plan_crit_d:"இப்போதே செலவுகளை குறைக்கவும். MYFutureJobs பதிவு செய்யுங்கள். HRD Corp மறுபயிற்சி (RM400/மாதம்). CGC அவசர கடன்.",
-plan_mod:"🟡 மிதமான — வருமானத்தில் கவனம்",
-plan_mod_d:"3-6 மாதங்கள் பஃபர். வேலை தேடல் முன்னுரிமை: MYFutureJobs, LinkedIn, JobStreet.",
-plan_ok:"🟢 ஆரோக்கியமான — மூலோபாயமாக திட்டமிடுங்கள்",
-plan_ok_d:"நேரத்தை திறமை மேம்படுத்த, தொழில் மாற்றம் அல்லது வியாபாரம். MYFutureJobs பதிவு செய்யுங்கள்.",
-plan_tax:"💰 உங்கள் பணிநீக்க ஊதியம் முழுமையாக வரி விலக்கு",
-plan_tax_d:"RM10,000/ஆண்டு சேவை வரி விலக்கு வரம்பில்.",
-plan_srt:"⚠️ 1 ஆண்டு சேவைக்கு கீழே",
-plan_srt_d:"குறைந்த பணிநீக்க ஊதியம் (10 நாட்கள்/ஆண்டு). ஒப்பந்தம் சரிபார்க்கவும். நீதி இல்லையென்றால் தொழில் துறை.",
-plan_dl:"📌 முக்கிய கடைசி தேதிகள்",plan_dd:"• 7 நாட்கள்: முதலாளியிடமிருந்து அனைத்து பணம்\n• 60 நாட்கள்: SOCSO EIS உரிமை கோரல்\n• வெளியேறும் முன்: EA படிவம்\n• உடனடியாக: MYFutureJobs",
-ch:["SOCSO EIS உரிமை கோரல் (60 நாட்கள்!)","MYFutureJobs பதிவு","முதலாளியிடமிருந்து EA படிவம் பெறுங்கள்","EPF கணக்கு 2 திரும்பப் பெறுங்கள்","காப்பீடு / மருத்துவ காப்பீடு","Resume & LinkedIn புதுப்பிக்கவும்","மறுபயிற்சி திட்டங்கள் (HRD Corp)","மாத பட்ஜெட் மதிப்பீடு"],
-chd:["PERKESE போர்டல்: IC, பணிநீக்கக் கடிதம், 3 சம்பள பட்டியல், வங்கி விவரங்கள்","myfuturejobs.perkeso.gov.my — EIS அவசியம்","வரி தாக்கலுக்கு தேவை. முதலாளி வழங்க வேண்டும்","i-Akaun போர்டல் அல்லது KWSD கிளை","உடனடியாக முடியலாம்","'Open to Work' குறியிடவும்","இலவச பயிற்சி + RM400/மாதம் படி","அத்தியாவசியமற்ற செலவுகளை குறைக்கவும்"]
+sev_label:"நாட்கள்/ஆண்டு ×",yrs_label:"ஆண்டு",mo:"மாத",mop:"மாதங்கள்",rm_label:"RM",
+p_sev:"ஊதியம்",p_eis:"SOCSO",p_epf:"EPF",p_not:"அறிவிப்பு",
+plan_crit:"🔴 அவசரம்: <3 மாத",
+plan_crit_d:"செலவு குறைக்க.",
+plan_mod:"🟡 மிதம்: 3-6 மாத",
+plan_mod_d:"வேலை தேட.",
+plan_ok:"🟢 ஆரோக்கிய",
+plan_ok_d:"திறமை.",
+plan_tax:"💰 வரி இல்லை",
+plan_tax_d:"RM10k/ஆண்டு.",
+plan_srt:"⚠️ <1 ஆண்டு",
+plan_srt_d:"குறைந்தது.",
+plan_dl:"📌 தேதி",plan_dd:"• 7 நாட்கள்: பணம்\n• 60 நாட்கள்: EIS\n• EA\n• MYFutureJobs",
+ch:["SOCSO EIS கோரல்","MYFutureJobs","EA பெற","EPF திரும்ப","காப்பீடு","Resume","HRD Corp","பட்ஜெட்"],
+chd:["PERKESO","myfuturejobs.perkeso.gov.my","வரி","i-Akaun","காப்பீடு","Open to Work","இலவச","குறை"]
 }
 };
 
@@ -499,24 +498,40 @@ function sevRate(y){return y<=2?10:y<=5?15:20}
 function calcSev(s,y,ct){let d=s/26,r=sevRate(y);if(ct==='union')r=Math.min(r+5,25);if(ct==='executive')r=Math.min(r+8,30);return Math.round(r*y*d)}
 function calcEIS(s,y,on){if(!on)return 0;let m=Math.min(s,1700),pct=y<5?.8:.7,max=Math.min(m*pct,1360);return Math.round(max*6)}
 function calcEPF(on,bal,s,y){if(!on)return 0;if(bal>0)return Math.round(bal*.4);let emp=s>5e3?12:11,ee=s>5e3?16:11,t=0;for(let i=0;i<y;i++)t+=(emp+ee)/100*s*12*1.045;return Math.round(t*.3)}
-function termTax(y,sev){let ex=y*1e4;if(sev<=ex)return 0;let tx=sev-ex;return tx<=5e3?0:tx<=2e4?(tx-5e3)*.01:tx<=35e3?150+(tx-2e4)*.03:tx<=5e4?600+(tx-35e3)*.06:Math.round(tx*.08)}
+function termTax(y,sev){let ex=y*1e4;if(sev<=ex)return 0;let tx=sev-ex;return tx<=5e3?0:tx<=2e4?(tx-5e3)*.01:tx<=35e3?150+(tx-2e4)*.03:tx<=50e4?600+(tx-35e3)*.06:Math.round(tx*.08)}
 function noticePay(s,n){return Math.round(s*n)}
 
-/* ============ RENDER ============ */
-function d(){return{salary:parseFloat($('salary')?.value)||0,yrs:parseFloat($('years')?.value)||0,age:parseFloat($('age')?.value)||0,notice:parseFloat($('notice')?.value)||0,epfbal:parseFloat($('epfbal')?.value)||0,expenses:parseFloat($('expenses')?.value)||0,ct:$('contract')?.value||'default',socso:$('socso')?.checked!==false,epf:$('epf')?.checked!==false,dp:parseInt($('dependants')?.value)||0,st:$('state')?.value||'KL'}}
+/* ============ DATA ============ */
+function d(){
+return{
+salary:parseFloat($('salary')?.value)||0,
+yrs:parseFloat($('years')?.value)||0,
+age:parseFloat($('age')?.value)||0,
+notice:parseFloat($('notice')?.value)||0,
+epfbal:parseFloat($('epfbal')?.value)||0,
+expenses:parseFloat($('expenses')?.value)||0,
+ct:$('contract')?.value||'default',
+tt:$('termtype')?.value||'retrench',
+socso:$('socso')?.checked!==false,
+epf:$('epf')?.checked!==false,
+dp:parseInt($('dependants')?.value)||0,
+st:$('state')?.value||'KL'
+}
+}
 
+/* ============ RENDER ============ */
 function render(){
 const T=_T[L]||_T.en;
 $('lsb').innerHTML=T.logo;
 $('lang').innerHTML=Object.entries(LS).map(([k,v])=>`<option value="${k}"${k===L?' selected':''}>${v}</option>`).join('');
-$('lang').onchange=function(){setLang(this.value)};
+$('lang').setAttribute('onchange','setLang(this.value)');
 $('nav').innerHTML=T.tabs.map((t,i)=>`<button class="tb${i===0?' on':''}" data-p="${['home','calc','results','rights','help'][i]}" onclick="show('${['home','calc','results','rights','help'][i]}',this)">${t}</button>`).join('');
 let pg=$('pg'),html='';
 
 /* HOME */
-html+=`<div class="pg on" id="p-home"><div style="text-align:center;padding:40px 0 24px"><div class="sv" style="font-size:42px;color:var(--a);margin-bottom:16px">🇲🇾</div><div style="font-size:32px;font-weight:800;margin-bottom:8px">${T.hero_t}</div><div style="font-size:18px;color:var(--td);max-width:600px;margin:0 auto 24px">${T.hero_d}</div><button class="btn bp" onclick="show('calc',document.querySelectorAll('.tb')[1])" style="font-size:18px;padding:16px 40px">${T.hero_b}</button></div>`;
+html+=`<div class="pg on" id="p-home"><div style="text-align:center;padding:40px 0 24px"><div class="sv" style="font-size:42px;color:var(--a);margin-bottom:16px">🇲</div><div style="font-size:32px;font-weight:800;margin-bottom:8px">${T.hero_t}</div><div style="font-size:18px;color:var(--td);max-width:600px;margin:0 auto 24px">${T.hero_d}</div><button class="btn bp" onclick="show('calc',document.querySelectorAll('.tb')[1])" style="font-size:18px;padding:16px 40px">${T.hero_b}</button></div>`;
 html+=`<div class="g4" style="margin-bottom:24px">`;
-html+=mkStat(T.s1,s1v(T),T.s1c),html+=mkStat(T.s2,T.s2v,T.s2c),html+=mkStat(T.s3,T.s3v,T.s3c),html+=mkStat(T.s4,T.s4v,T.s4c);
+html+=mkStat(T.s1,T.s1v,T.s1c),html+=mkStat(T.s2,T.s2v,T.s2c),html+=mkStat(T.s3,T.s3v,T.s3c),html+=mkStat(T.s4,T.s4v,T.s4c);
 html+=`</div><div class="g2"><div class="cd"><div class="ct">${T.trend}</div><div class="bars" style="margin-top:16px">`;
 T.tm.forEach((m,i)=>{html+=`<div class="bar" style="height:${(T.tv[i]/8500*80)+15}%;background:${T.tc[i]}"><div class="bv" style="color:${T.tc[i]}">${fmt(T.tv[i])}</div><div class="bl">${T.days?.[i]||m}</div></div>`;});
 html+=`</div><div style="font-size:12px;color:var(--td);margin-top:28px">${T.trend_s}</div></div>`;
@@ -526,7 +541,7 @@ html+=`</div></div></div><div class="nb ok">${T.priv}</div></div>`;
 
 /* CALC */
 html+=`<div class="pg" id="p-calc"><div class="ct" style="font-size:22px;margin-bottom:4px">${T.calc_t}</div><div class="cd"><div class="ig2"><div class="ig"><label class="il">${T.f_sal}</label><input class="inp" id="salary" type="number" placeholder="5000" oninput="autoCalc()"></div><div class="ig"><label class="il">${T.f_yrs}</label><input class="inp" id="years" type="number" placeholder="5" step="0.1" oninput="autoCalc()"></div><div class="ig"><label class="il">${T.f_age}</label><input class="inp" id="age" type="number" placeholder="35" oninput="autoCalc()"></div><div class="ig"><label class="il">${T.f_not}</label><input class="inp" id="notice" type="number" value="1" min="0" max="6" oninput="autoCalc()"></div></div>`;
-html+=`<div class="ig2" style="margin-top:6px"><div class="ig"><label class="il">${T.f_ct}</label><select class="sel" id="contract" onchange="autoCalc()"><option value="default">${T.co[0]}</option><option value="union">${T.co[1]}</option><option value="executive">${T.co[2]}</option></select></div><div class="ig"><label class="il">${T.f_tt}</label><select class="sel" id="termtype"><option>${T.to[0]}</option><option>${T.to[1]}</option><option>${T.to[2]}</option></select></div></div>`;
+html+=`<div class="ig2" style="margin-top:6px"><div class="ig"><label class="il">${T.f_ct}</label><select class="sel" id="contract" onchange="autoCalc()"><option value="default">${T.co[0]}</option><option value="union">${T.co[1]}</option><option value="executive">${T.co[2]}</option></select></div><div class="ig"><label class="il">${T.f_tt}</label><select class="sel" id="termtype"><option value="retrench">${T.to[0]}</option><option value="dismiss">${T.to[1]}</option><option value="mutual">${T.to[2]}</option></select></div></div>`;
 html+=`<div class="ig2" style="margin-top:6px"><div><label class="ck"><input type="checkbox" id="socso" checked onchange="autoCalc()">${T.f_sc}</label></div><div><label class="ck"><input type="checkbox" id="epf" checked onchange="autoCalc()">${T.f_ec}</label></div></div>`;
 html+=`<div class="ig" style="margin-top:10px"><label class="il">${T.f_b}</label><input class="inp" id="epfbal" type="number" placeholder="30000" oninput="autoCalc()"><div class="h">${T.f_hb}</div></div>`;
 html+=`<div class="ig"><label class="il">${T.f_ex}</label><input class="inp" id="expenses" type="number" placeholder="3000" oninput="autoCalc()"><div class="h">${T.f_hx}</div></div>`;
@@ -571,14 +586,13 @@ function mkStat(l,v,c){return`<div class="st"><div class="sv" style="color:var(-
 function mkTl(n,t,d,c){return`<div class="ti"><div class="tdot" style="background:${c}"></div><div class="tt">${t}</div><div class="tw">${d}</div></div>`}
 function mkIB(h,bd){return`<div class="ib"><div class="ih">${h}</div><div class="id">${bd}</div></div>`}
 function mkNB(t,h,bd){return`<div class="nb ${t}"><b>${h}</b><br><span style="font-size:13px">${bd}</span></div>`}
-function s1v(T){return T.s1v}
 
 /* ========== NAV ========== */
 function show(pg,el){
 document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
 document.querySelectorAll('.tb').forEach(t=>t.classList.remove('on'));
-$('p-'+pg).classList.add('on');
-if(!el)document.querySelector(`.tb[data-p="${pg}"]`)?.classList.add('on');
+document.getElementById('p-'+pg).classList.add('on');
+if(!el){document.querySelector(`.tb[data-p="${pg}"]`)?.classList.add('on');}
 else el.classList.add('on');
 if(pg==='results')showResults();
 window.scrollTo({top:0,behavior:'smooth'});
@@ -590,18 +604,25 @@ function autoCalc(){}
 /* ========== RESULTS ========== */
 function showResults(){
 const T=_T[L]||_T.en,D=d();
-let sev=calcSev(D.salary,D.yrs,D.ct),eis=calcEIS(D.salary,D.yrs,D.socso),epf=calcEPF(D.epf,D.epfbal,D.salary,D.yrs),np=noticePay(D.salary,D.notice);
+const actualRate=sevRate(D.yrs)+(D.ct==='union'?5:D.ct==='executive'?8:0);
+const isDismiss=D.tt==='dismiss',isMSS=D.tt==='mutual';
+let sev=isDismiss?0:calcSev(D.salary,D.yrs,D.ct);
+let eis=(isMSS||isDismiss||!D.socso)?0:calcEIS(D.salary,D.yrs,D.socso);
+let epf=calcEPF(D.epf,D.epfbal,D.salary,D.yrs),np=noticePay(D.salary,D.notice);
 let tax=termTax(D.yrs,sev),total=sev+eis+epf+np-tax,run=D.expenses>0?total/D.expenses:0,tt=sev+eis+epf+np;
 let h=`<div class="ct" style="font-size:22px;margin-bottom:16px">${T.r_t}</div>`;
+let ctLabel=D.ct==='union'?T.co[1]:D.ct==='executive'?T.co[2]:T.co[0];
+let ttLabel=D.tt==='retrench'?T.to[0]:D.tt==='dismiss'?T.to[1]:T.to[2];
+h+=`<div class="nb nfo" style="margin-bottom:12px;font-size:13px"><b>${T.r_ctx}</b><br>${ctLabel} + ${ttLabel}</div>`;
 h+=`<div class="g4" style="margin-bottom:16px">`;
 const rc=run>8?'g':run>4?'a':'r';
 h+=`<div class="st"><div class="sv" style="color:var(--${rc})">RM ${fmt(total)}</div><div class="sl">${T.r_ttl}</div><div class="su sg">After tax (RM ${fmt(tax)})</div></div>`;
-h+=`<div class="st"><div class="sv" style="color:var(--a)">RM ${fmt(sev)}</div><div class="sl">${T.r_sev}</div><div class="su sa">${sevRate(D.yrs)} ${T.sev_label} ${D.yrs.toFixed(1)} ${T.yrs_label}</div></div>`;
+h+=`<div class="st"><div class="sv" style="color:var(--a)">RM ${fmt(sev)}</div><div class="sl">${T.r_sev}</div><div class="su sa">${actualRate} ${T.sev_label} ${D.yrs.toFixed(1)} ${T.yrs_label}</div></div>`;
 h+=`<div class="st"><div class="sv" style="color:var(--p)">RM ${fmt(eis)}</div><div class="sl">${T.r_eis}</div><div class="su sa">6 ${T.mo} × RM ${fmt(eis/6)}/${T.mo}</div></div>`;
 h+=`<div class="st"><div class="sv" style="color:var(--am)">RM ${fmt(epf)}</div><div class="sl">${T.r_epf}</div><div class="su sa"></div></div></div>`;
 h+=`<div class="g4" style="margin-bottom:16px"><div class="st"><div class="sv" style="color:var(--c)">RM ${fmt(np)}</div><div class="sl">${T.r_not}</div><div class="su sa">${D.notice} ${T.mop}</div></div>`;
 h+=`<div class="st"><div class="sv" style="color:var(--r)">RM ${fmt(D.expenses)}</div><div class="sl">${T.r_exp}</div></div>`;
-h+=`<div class="st"><div class="sv" style="color:var(--${rc})">${run.toFixed(1)} ${T.mop}</div><div class="sl">${T.r_run}</div><div class="su s${rc}">${run<=4?T.r_u:run>12?T.c:T.r_m}</div></div></div>`;
+h+=`<div class="st"><div class="sv" style="color:var(--${rc})">${run.toFixed(1)} ${T.mop}</div><div class="sl">${T.r_run}</div><div class="su s${rc}">${run<=4?T.r_u:run>12?T.r_c:T.r_m}</div></div></div>`;
 
 h+=`<div class="g2"><div class="cd"><div class="ct" style="margin-bottom:16px">${T.r_brk}</div>`;
 [{l:T.p_sev,v:sev,c:'var(--a)'},{l:T.p_eis,v:eis,c:'var(--p)'},{l:T.p_epf,v:epf,c:'var(--am)'},{l:T.p_not,v:np,c:'var(--c)'}].forEach(i=>{
@@ -609,7 +630,9 @@ let pct=tt>0?i.v/tt*100:0;
 h+=`<div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px"><span>${i.l}</span><span style="font-weight:600;color:${i.c}">RM ${fmt(i.v)}</span></div><div class="pb"><div class="pbf" style="width:${pct}%;background:${i.c}"></div></div></div>`;
 });
 h+=`</div><div><div class="cd" style="margin-bottom:16px"><div class="ct" style="margin-bottom:16px">${T.r_tl}</div><div class="tl">`;
-h+=mkTlN(T.r_t1,T.r_t1d,'var(--g)'),h+=mkTlN(T.r_t2,T.r_t2d,'var(--am)'),h+=mkTlN(T.r_t3,T.r_t3d,'var(--p)');
+h+=mkTl(1,T.r_t1,`RM ${fmt(sev)} + RM ${fmt(np)} — ${T.r_t1d}`,'var(--g)'),
+h+=mkTl(1,T.r_t2,`RM ${fmt(eis/6)}/${T.mo} × 6 — ${T.r_t2d}`,'var(--am)'),
+h+=mkTl(1,T.r_t3,`RM ${fmt(epf)} — ${T.r_t3d}`,'var(--p)');
 h+=`</div></div></div></div>`;
 
 h+=`<div class="cd" style="margin-top:16px"><div class="ct" style="margin-bottom:12px">${T.r_pl}</div>`;
@@ -620,7 +643,9 @@ else plans.push({t:'ok',h:T.plan_ok,b:T.plan_ok_d});
 if(tax<=0)plans.push({t:'ok',h:T.plan_tax,b:T.plan_tax_d});
 else plans.push({t:'wrn',h:'💰 Tax: RM '+fmt(tax),b:'May be partially taxable.'});
 if(D.yrs<1)plans.push({t:'err',h:T.plan_srt,b:T.plan_srt_d});
-plans.push({t:'nfo',h:T.plan_dl,b:T.plan_dd.replace(/\\n/g,'<br>')});
+if(isDismiss)plans.push({t:'err',h:'⚠️ Dismissed = RM0',b:'Employment Act: misconduct = zero benefits. SOCSO/EIS eligible.'});
+if(isMSS)plans.push({t:'wrn',h:'⚠️ Voluntary — No EIS',b:'EIS pays only retrenchment. Check your letter.'});
+plans.push({t:'nfo',h:T.plan_dl,b:T.plan_dd.replace(/\n/g,'<br>')});
 plans.forEach(p=>{h+=`<div class="nb ${p.t}" style="margin-bottom:8px"><b>${p.h}</b><br><span style="font-size:13px">${p.b}</span></div>`;});
 h+=`</div>`;
 
@@ -630,15 +655,17 @@ h+=`</div>`;
 
 h+=`<div class="cd" style="margin-top:16px;text-align:center"><div class="ct">${T.r_sh}</div><p style="font-size:14px;color:var(--td);margin:10px 0">${T.r_shd}</p><button class="btn bp" onclick="window.print()">${T.r_p}</button></div>`;
 
-$('rc').innerHTML=h;
+document.getElementById('rc').innerHTML=h;
 window.scrollTo({top:0,behavior:'smooth'});
 }
 
-/* helper for timeline with note */
-function mkTlN(t,d,c){return`<div class="ti"><div class="tdot" style="background:${c}"></div><div class="tt">${t}</div><div class="tw">${d}</div></div>`}
-
 /* ============ LANG SWITCH ============ */
-function setLang(v){L=v;localStorage.setItem('kl-lang',v);render();show('home',document.querySelector('.tb'))}
+function setLang(v){
+L=v;
+localStorage.setItem('kl-lang',v);
+render();
+show('home',document.querySelector('.tb'));
+}
 
 /* ============ INIT ============ */
 setLang(L);
