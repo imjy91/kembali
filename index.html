@@ -531,7 +531,7 @@ html+=`<div class="ig2" style="margin-top:6px"><div><label class="ck"><input typ
 html+=`<div class="ig" style="margin-top:10px"><label class="il">${T.f_b}</label><input class="inp" id="epfbal" type="number" placeholder="30000" oninput="autoCalc()"><div class="h">${T.f_hb}</div></div>`;
 html+=`<div class="ig"><label class="il">${T.f_ex}</label><input class="inp" id="expenses" type="number" placeholder="3000" oninput="autoCalc()"><div class="h">${T.f_hx}</div></div>`;
 html+=`<div class="ig2" style="margin-top:6px"><div class="ig"><label class="il">${T.f_dp}</label><select class="sel" id="dependants">${T.dp.map(x=>`<option>${x}</option>`).join('')}</select></div><div class="ig"><label class="il">${T.f_st}</label><select class="sel" id="state">${T.sp.map(x=>`<option>${x}</option>`).join('')}</select></div></div>`;
-html+=`<button class="btn bp bbk" onclick="showResults()">${T.cb}</button></div></div>`;
+html+=`<button class="btn bp bbk" onclick="showResults();show('results')">${T.cb}</button></div></div>`;
 
 /* RESULTS */
 html+=`<div class="pg" id="p-results"><div id="rc"></div></div>`;
