@@ -156,6 +156,7 @@ cr:"📊 Community Resources",
 cr1:"Federal CGC",cr1d:"Low-interest loans for retrenched workers",
 cr2:"AKRAB programme",cr2d:"PERKESO career transition support",
 dp:["None","1 dependant","2 dependants","3+ dependants"],
+sugg:"Suggested Budget",rent:"Rent",food:"Food",trans:"Transport",
 sp:["Kuala Lumpur","Selangor","Johor","Penang","Other"],
 co:["Default (JTAS)","Union / Collective","Executive"],
 to:["Retrenchment / Redundancy","Misconduct / Dismissed","Mutual Separation (MSS)"],
@@ -544,8 +545,8 @@ html+=`<div class="pg" id="p-calc"><div class="ct" style="font-size:22px;margin-
 html+=`<div class="ig2" style="margin-top:6px"><div class="ig"><label class="il">${T.f_ct}</label><select class="sel" id="contract" onchange="autoCalc()"><option value="default">${T.co[0]}</option><option value="union">${T.co[1]}</option><option value="executive">${T.co[2]}</option></select></div><div class="ig"><label class="il">${T.f_tt}</label><select class="sel" id="termtype"><option value="retrench">${T.to[0]}</option><option value="dismiss">${T.to[1]}</option><option value="mutual">${T.to[2]}</option></select></div></div>`;
 html+=`<div class="ig2" style="margin-top:6px"><div><label class="ck"><input type="checkbox" id="socso" checked onchange="autoCalc()">${T.f_sc}</label></div><div><label class="ck"><input type="checkbox" id="epf" checked onchange="autoCalc()">${T.f_ec}</label></div></div>`;
 html+=`<div class="ig" style="margin-top:10px"><label class="il">${T.f_b}</label><input class="inp" id="epfbal" type="number" placeholder="30000" oninput="autoCalc()"><div class="h">${T.f_hb}</div></div>`;
-html+=`<div class="ig"><label class="il">${T.f_ex}</label><input class="inp" id="expenses" type="number" placeholder="3000" oninput="autoCalc()"><div class="h">${T.f_hx}</div></div>`;
-html+=`<div class="ig2" style="margin-top:6px"><div class="ig"><label class="il">${T.f_dp}</label><select class="sel" id="dependants">${T.dp.map(x=>`<option>${x}</option>`).join('')}</select></div><div class="ig"><label class="il">${T.f_st}</label><select class="sel" id="state">${T.sp.map(x=>`<option>${x}</option>`).join('')}</select></div></div>`;
+html+=`<div class="ig"><label class="il">${T.f_ex}</label><input class="inp" id="expenses" type="number" placeholder="3000" oninput="autoCalc()"><div id="budget-hint" class="h" style="color:var(--am);font-weight:500"></div></div>`;
+html+=`<div class="ig2" style="margin-top:6px"><div class="ig"><label class="il">${T.f_dp}</label><select class="sel" id="dependants">${T.dp.map(x=>`<option>${x}</option>`).join('')}</select></div><div class="ig"><label class="il">${T.f_st}</label><select class="sel" id="state" onchange="updateStateBudget()">${T.sp.map(x=>`<option>${x}</option>`).join('')}</select></div></div>`;
 html+=`<button class="btn bp bbk" onclick="showResults();show('results')">${T.cb}</button></div></div>`;
 
 /* RESULTS */
@@ -659,6 +660,32 @@ document.getElementById('rc').innerHTML=h;
 window.scrollTo({top:0,behavior:'smooth'});
 }
 
+
+/* ============ STATE COST OF LIVING ============ */
+const stateBudgets = {
+  'KL': { total: 3000, rent: 1500, food: 900, trans: 300, util: 150 },
+  'SEL': { total: 2500, rent: 1200, food: 800, trans: 400, util: 150 },
+  'PNG': { total: 2200, rent: 900, food: 800, trans: 200, util: 150 },
+  'JHR': { total: 2100, rent: 900, food: 700, trans: 300, util: 150 },
+  'other': { total: 1600, rent: 600, food: 600, trans: 200, util: 100 }
+};
+
+function updateStateBudget() {
+  const el = document.getElementById('state');
+  if (!el) return;
+  const st = el.value || 'KL';
+  const b = stateBudgets[st] || stateBudgets['other'];
+  const hint = document.getElementById('budget-hint');
+  if (!hint) return;
+  
+  const lang = L || 'en';
+  const d = (_T[lang] && _T[lang].sugg) ? _T[lang] : _T.en;
+  
+  hint.innerHTML = `<b>${d.sugg}</b>: RM ${b.total} — ${d.rent} ${b.rent}, ${d.food} ${b.food}, ${d.trans} ${b.trans}`;
+  hint.style.color = 'var(--am)';
+}
+
+
 /* ============ LANG SWITCH ============ */
 function setLang(v){
 L=v;
@@ -669,6 +696,7 @@ show('home',document.querySelector('.tb'));
 
 /* ============ INIT ============ */
 setLang(L);
+setTimeout(updateStateBudget, 100);
 </script>
 </body>
 </html>
