@@ -509,6 +509,7 @@ function render(){
 const T=_T[L]||_T.en;
 $('lsb').innerHTML=T.logo;
 $('lang').innerHTML=Object.entries(LS).map(([k,v])=>`<option value="${k}"${k===L?' selected':''}>${v}</option>`).join('');
+$('lang').onchange=function(){setLang(this.value)};
 $('nav').innerHTML=T.tabs.map((t,i)=>`<button class="tb${i===0?' on':''}" data-p="${['home','calc','results','rights','help'][i]}" onclick="show('${['home','calc','results','rights','help'][i]}',this)">${t}</button>`).join('');
 let pg=$('pg'),html='';
 
