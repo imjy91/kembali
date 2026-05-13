@@ -1,40 +1,42 @@
-🧮 Concept: One-Stop Retrenchment Portal for Malaysia
-What It Does
-5 calculators, 1 interface, 0 confusion:
-#: 1
-• Calculator: Termination Benefits
-• What it answers: "What do I get from my employer?" — Days of pay × years of service based on your contract, union terms, or JTAS default (0-2 yrs = 10 days/yr, 2-5 yrs = 15 days/yr, 5+ yrs = 20 days/yr)
+🧮 One-Stop Retrenchment Portal for Malaysia
 
-#: 2
-• Calculator: SOCSO / EIS (SIP Prihatin)
-• What it answers: "How much government support can I claim?" — Monthly allowance (60-80% of last salary, up to 6 months). Factors in your SOCSO wage ceiling
+What It Does:
 
-#: 3
-• Calculator: EPF Withdrawal
-• What it answers: "Can I touch my retirement savings early?" — Akaun 2/55+ withdrawal eligibility, how much you can take, and the tax implications
+- Termination Benefits Calculator: This calculator helps you determine the termination benefits you’ll receive from your employer. It considers factors like your contract, union terms, or JTAS default (0-2 years = 10 days/year, 2-5 years = 15 days/year, 5+ years = 20 days/year).
 
-#: 4
-• Calculator: Tax Impact
-• What it answers: "Will my severance be taxable?" — Malaysia exempts termination benefits up to RM10k/yr of service after 1999. Calculates net after-tax payout
+- SOCSO / EIS (SIP Prihatin) Calculator: This calculator calculates the government support you can claim, including your monthly allowance. The allowance is between 60-80% of your last salary, up to a maximum of 6 months. It also takes into account your SOCSO wage ceiling.
 
-#: 5
-• Calculator: Runway Calculator
-• What it answers: "How long can I survive?" — Total payout (severance + SOCSO + EPF) vs monthly expenses → gives you a "months of runway" number
+- EPF Withdrawal Calculator: This calculator determines whether you can access your retirement savings early. It provides information on Account 2/55+ withdrawal eligibility, the amount you can withdraw, and the tax implications.
 
-Why It Doesn't Exist Yet
-Existing tools cover exactly one piece:
-- JTSM has a termination calculator (but buried in their FAQ)
-- SOCSO portal — you have to know about EIS, SIP, SOERMA separately
-- LHDN — separate tax calculator, no retrenchment context
-- Private tools like Fincrew — only do SOCSO or one calculation
-- Nobody strings them into a financial survival picture
+- Tax Impact Calculator: This calculator assesses whether your severance pay will be taxable. It takes into account Malaysia’s exemption of termination benefits up to RM10,000 per year of service after 1999. It calculates your net after-tax payout.
 
-Bonus Features That Differentiate It
-1. Anonymous retrenchment trend data — "Manufacturing laid off 12,400 in Q1 2026. Top sectors affected: [bar chart]. Your company [X] has [N] retrenchments on record."
-2. Job matching — Integrate with MYFutureJobs / LinkedIn / JobStreet APIs to show open roles matching your skills
-3. Upskilling grants — "You may qualify for HRD Corp training, PERKESO reskilling programme (RM400/month while training)"
-4. Legal rights explainer — "Your employer MUST do X. If they don't, here's how to lodge a dispute with JTM."
-5. Mental health resources — Befrienders, Talian Kasih, community support
-6. Multi-language — BM, English, Chinese, Tamil
-7. No login required — Everything runs client-side (no data collected, builds trust for anxious users)
-8. Shareable PDF — One-click export of your entire payout calculation + next-steps checklist
+- Runway Calculator: This calculator estimates how long you can survive financially after a retrenchment. It compares your total payout (severance, SOCSO, and EPF) with your monthly expenses and provides you with a “months of runway” number.
+
+Why It Doesn’t Exist Yet:
+
+Existing tools provide support for only one aspect of retrenchment:
+
+- JTSM offers a termination calculator, but it’s buried in their FAQ.
+- The SOCSO portal requires you to be aware of EIS, SIP, and SOERMA separately.
+- LHDN provides a separate tax calculator, but it doesn’t consider the context of retrenchment.
+- Private tools like Fincrew only offer support for SOCSO or a single calculation.
+- No one has integrated these tools into a comprehensive financial survival picture.
+
+Bonus Features That Differentiate It:
+
+This retrenchment portal offers a comprehensive solution by providing calculators for all the key aspects of financial planning after a retrenchment. It eliminates the need to use multiple tools and provides a holistic view of your financial situation.
+1. Anonymous retrenchment trend data: “Manufacturing industry experienced a significant reduction in workforce, with 12,400 employees laid off in the first quarter of 2026. The top sectors affected by this trend are depicted in the accompanying bar chart. Your company, [X], has a record of [N] retrenchments.”
+
+2. Job matching: Integrate with the APIs of MYFutureJobs, LinkedIn, and JobStreet to display open job roles that align with your skills and qualifications.
+
+3. Upskilling grants: Explore the possibility of qualifying for HRD Corp training or the PERKESO reskilling program, which offers a monthly stipend of RM400 during the training period.
+
+4. Legal rights explainer: Understand your legal rights and responsibilities as an employee. The platform provides clear guidance on what your employer is required to do and offers a step-by-step process for lodging disputes with the Job Tribunal (JTM).
+
+5. Mental health resources: Access a range of mental health support services, including befrienders, Talian Kasih, and community support groups, to help you cope with the challenges you may be facing.
+
+6. Multi-language support: The platform offers support in multiple languages, including Bahasa Melayu (BM), English, Chinese, and Tamil, ensuring that users from diverse linguistic backgrounds can access the information they need.
+
+7. No login required: The platform operates entirely on a client-side basis, eliminating the need for users to log in. This approach enhances user trust, especially for individuals who may be anxious about sharing their personal information.
+
+8. Shareable PDF: Easily export your entire payout calculation and a comprehensive checklist of next steps with a single click, making it convenient for users to share this information with others or for future reference.
