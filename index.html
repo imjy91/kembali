@@ -503,7 +503,7 @@ function fmt(n){try{return Number(n).toLocaleString('en-MY',{minimumFractionDigi
 function sevRate(y){return y<=2?10:y<=5?15:20}
 function calcSev(s,y,ct){let d=s/26,r=sevRate(y);if(ct==='union')r=Math.min(r+5,25);if(ct==='executive')r=Math.min(r+8,30);return Math.round(r*y*d)}
 function calcEIS(s,y,on){if(!on)return 0;let m=Math.min(s,5e3),b1=y<5?.8:.7,m1=Math.min(m*b1,1360),b2=y<5?.7:.6,m2=Math.min(m*b2,1360),b3=y<5?.6:.5,m3=Math.min(m*b3,1360);return Math.round(m1*3+m2*3+m3*6)}
-function calcEPF(on,bal,s,y){if(!on)return 0;if(bal>0)return Math.round(bal*.25);let emp=s>5e3?11:12,ee=s>5e3?11:16,t=0;for(let i=0;i<Math.round(y);i++)t+=(emp+ee)/100*s*12*1.046;return Math.round(t*.25)}
+function calcEPF(on,bal,s,y){if(!on)return 0;if(bal>0)return Math.round(bal*.25);let emp=s>5e3?12:13,ee=11,t=0;for(let i=0;i<Math.round(y);i++)t+=(emp+ee)/100*s*12*1.046;return Math.round(t*.25)}
 function termTax(y,sev){let ex=y*1e4;if(sev<=ex)return 0;let tx=sev-ex;if(tx<=5e3)return 0;if(tx<=2e4)return Math.round((tx-5e3)*.01);if(tx<=35e3)return Math.round(150+(tx-2e4)*.03);if(tx<=1e5)return Math.round(600+(tx-35e3)*.06);if(tx<=25e4)return Math.round(4500+(tx-1e5)*.11);if(tx<=5e5)return Math.round(21000+(tx-25e4)*.19);if(tx<=1e6)return Math.round(68500+(tx-5e5)*.25);if(tx<=25e5)return Math.round(118500+(tx-1e6)*.26);return Math.round(424500+(tx-25e5)*.28)}
 function noticePay(s,n){return Math.round(s*n)}
 
