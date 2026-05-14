@@ -54,7 +54,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC','Not
 .ib{padding:10px 0;border-bottom:1px solid var(--b)}.ib:last-child{border:none}
 .ih{font-weight:500;font-size:14px;margin-bottom:2px}.id{font-size:13px;color:var(--td)}
 @media(max-width:768px){.g2,.g3,.g4{grid-template-columns:1fr}.c{padding:14px}.ig2{grid-template-columns:1fr}.tb{padding:6px 8px;font-size:11px}.lt small{display:none}.nr{padding:0 4px}}
-@media print{body{background:#fff!important;color:#000!important}.nav,.btn,.ls{display:none!important}.pg{display:block!important}.cd{background:#fff!important;border:1px solid #ccc!important;color:#000!important}.st{background:#f5f5f5!important}.sv,.sl,.su,.su.sg{color:#000!important}.h,.id,.cxd{color:#333!important}.il{color:#555!important}.inp,.sel{background:#fff!important;color:#000!important;border-color:#ccc!important}.nb,.bars>.bar{break-inside:avoid}.tl>.ti,.cli{break-inside:avoid}}
+@media print{@page{margin:10mm} body{background:#fff!important;color:#000!important}.nav,.btn,.ls{display:none!important}.pg{display:block!important}.cd{background:#fff!important;border:1px solid #ccc!important;color:#000!important}.st{background:#f5f5f5!important}.sv,.sl,.su,.su.sg{color:#000!important}.h,.id,.cxd{color:#333!important}.il{color:#555!important}.inp,.sel{background:#fff!important;color:#000!important;border-color:#ccc!important}.nb,.bars>.bar{break-inside:avoid}.tl>.ti,.cli{break-inside:avoid}}
+:root[data-mode="light"]{--bg:#f0f2f5;--s:#fff;--s2:#f5f6fa;--s3:#e8eaef;--b:#d0d4e0;--t:#1a1c2e;--td:#555570;--nf:rgba(64,112,255,.08);--nfb:rgba(64,112,255,.2);--wf:rgba(245,180,30,.08);--wfb:rgba(245,180,30,.2);--rf:rgba(220,60,60,.08);--rfb:rgba(220,60,60,.2);--gf:rgba(30,180,100,.08);--gfb:rgba(30,180,100,.2)}.mode-btn{padding:6px 10px;border:1px solid var(--b);border-radius:8px;background:var(--s2);color:var(--t);font-size:14px;cursor:pointer;white-space:nowrap;transition:.15s}
 </style>
 </head>
 <body>
@@ -64,6 +65,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC','Not
 <div class="tbs" id="nav"></div>
 </div>
 <select class="ls" id="lang" onchange="setLang(this.value)"></select>
+<button class="mode-btn" id="modeBtn" onclick="toggleMode()" title="Toggle dark/light mode">🌙</button>
 </div></nav>
 <div class="c"><div id="pg"></div></div>
 <script>
@@ -132,7 +134,7 @@ se_i:"If you contributed, you're eligible for Job Search + Temporary Allowance (
 se1:"60-80%\nof wage",se2:"6 months\nmax",se3:"RM 1,360\nmonthly cap",
 se_q:"<b>Eligibility:</b> 6 of last 12 months SOCSO. Age ≤60. Must register MYFutureJobs.",
 ep:"💰 EPF & Tax",
-ep1:"<b>EPF Akaun 2:</b> Retrenched workers can apply early withdrawal. Since July 2024, EPF uses 3 accounts: Persaraan (75%), Sejahtera (15%), Fleksibel (10%).",
+ep1:"<b>EPF Sejahtera + Fleksibel:</b> Retrenched workers can apply for early withdrawal. Since July 2024, EPF uses 3 accounts: Persaraan (75%), Sejahtera (15%), Fleksibel (10%). Only Sejahtera + Fleksibel (~25%) is withdrawable.",
 ep2:"<b>NOT taxable:</b> First RM10,000/year of service exempt after 1999.",
 cv:"⚠️ Watch Out",
 cv1:"'No severance policy' — JTAS default rates still apply by law",
@@ -140,6 +142,8 @@ cv2:"Classified as 'contractor' to avoid SOCSO — check status",
 cv3:"Deductions from severance — only for EPF/tax/court orders",
 cv4:"No payment in 7 days — file Labour Dept complaint immediately",
 cv5:"'Mutual separation' — don't sign without understanding terms",
+cv6:"EIS requires 6 months SOCSO contribution in last 12 months",
+cv7:"EIS requires age ≤60",
 he_t:"🆘 Help & Resources",
 gh:"📞 Government Hotlines",
 gh1:"SOCSO / PERKESO",gh1d:"1-300-22-8000 (24/7 June 2026)",
@@ -552,7 +556,7 @@ html+=`<div class="ig2" style="margin-top:6px"><div><label class="ck"><input typ
 html+=`<div class="ig" style="margin-top:10px"><label class="il" for="epfbal">${T.f_b}</label><input class="inp" id="epfbal" type="number" min="0" placeholder="30000" oninput="autoCalc()"><div class="h">${T.f_hb}</div><div class="h" style="color:var(--pk)">💡 EPF 3 accounts (Jul 2024): Fleksibel (10%) withdrawable. Check i-Akaun.</div></div>`;
 html+=`<div class="ig"><label class="il" for="expenses">${T.f_ex}</label><input class="inp" id="expenses" type="number" min="0" placeholder="3000" oninput="autoCalc()"><div id="budget-hint" class="h" style="color:var(--am);font-weight:500"></div></div>`;
 html+=`<div class="ig2" style="margin-top:6px"><div class="ig"><label class="il" for="dependants">${T.f_dp}</label><select class="sel" id="dependants">${T.dp.map(x=>`<option>${x}</option>`).join('')}</select></div><div class="ig"><label class="il" for="state">${T.f_st}</label><select class="sel" id="state" onchange="updateStateBudget()"><option value="KL">${T.sp[0]}</option><option value="SEL">${T.sp[1]}</option><option value="JHR">${T.sp[2]}</option><option value="PNG">${T.sp[3]}</option><option value="other">${T.sp[4]}</option></select></div></div>`;
-html+=`<button class="btn bp bbk" onclick="showResults();show('results')">${T.cb}</button></div></div>`;
+html+=`<div style="display:flex;gap:8px;margin-top:6px"><button class="btn bp bbk" onclick="validateAndShow()">${T.cb}</button><button class="btn" style="background:var(--s3);color:var(--td);font-size:14px" onclick="resetForm()">↺ Reset</button></div></div></div>`;
 
 /* RESULTS */
 html+=`<div class="pg" id="p-results"><div id="rc"></div></div>`;
@@ -570,7 +574,7 @@ html+=`<div class="st"><div class="sv" style="font-size:20px">${T.se2.split('\n'
 html+=`<div class="st"><div class="sv" style="font-size:20px">${T.se3.split('\n')[0]}</div><div class="sl">${T.se3.split('\n')[1]}</div></div></div>`;
 html+=`<div class="id" style="margin-top:12px">${T.se_q}</div></div>`;
 html+=`<div class="cd"><div class="ct" style="margin-bottom:12px">${T.ep}</div><div class="id" style="margin-top:8px">${T.ep1}</div><div class="id" style="margin-top:8px">${T.ep2}</div></div>`;
-html+=`<div class="cd"><div class="ct" style="margin-bottom:12px">${T.cv}</div><div class="id">${T.cv1}</div><div class="id" style="margin-top:6px">${T.cv2}</div><div class="id" style="margin-top:6px">${T.cv3}</div><div class="id" style="margin-top:6px">${T.cv4}</div><div class="id" style="margin-top:6px">${T.cv5}</div></div></div>`;
+html+=`<div class="cd"><div class="ct" style="margin-bottom:12px">${T.cv}</div><div class="id">${T.cv1}</div><div class="id" style="margin-top:6px">${T.cv2}</div><div class="id" style="margin-top:6px">${T.cv3}</div><div class="id" style="margin-top:6px">${T.cv4}</div><div class="id" style="margin-top:6px">${T.cv5}</div><div class="id" style="margin-top:6px">${T.cv6}</div><div class="id" style="margin-top:6px">${T.cv7}</div></div></div>`;
 
 /* HELP */
 html+=`<div class="pg" id="p-help"><div class="ct" style="font-size:22px;margin-bottom:20px">${T.he_t}</div><div class="g2"><div class="cd"><div class="ct" style="margin-bottom:12px">${T.gh}</div>`;
@@ -610,7 +614,9 @@ const CHK_KEYS=['socso','epf'];
 function saveForm(){const o={};FORM_KEYS.forEach(k=>{const el=$(k);if(el)o[k]=el.value});CHK_KEYS.forEach(k=>{const el=$(k);if(el)o[k]=el.checked});localStorage.setItem('kl-form',JSON.stringify(o))}
 function loadForm(){try{const o=JSON.parse(localStorage.getItem('kl-form')||'{}');o.salary&&($('salary').value=o.salary);o.years&&($('years').value=o.years);o.age&&($('age').value=o.age);o.notice!==undefined&&($('notice').value=o.notice);o.epfbal&&($('epfbal').value=o.epfbal);o.expenses&&($('expenses').value=o.expenses);o.contract&&($('contract').value=o.contract);o.termtype&&($('termtype').value=o.termtype);o.dependants!==undefined&&($('dependants').value=o.dependants);o.state&&($('state').value=o.state);o.socso!==undefined&&($('socso').checked=o.socso);o.epf!==undefined&&($('epf').checked=o.epf)}catch(e){}}
 let _acTimer=null;
-function autoCalc(){saveForm();clearTimeout(_acTimer);_acTimer=setTimeout(()=>{const D=d();if(D.salary<=0||D.yrs<=0)return;showResults()},300)}
+function autoCalc(){saveForm();clearTimeout(_acTimer);_acTimer=setTimeout(()=>{const D=d();if(D.salary<=0||D.yrs<=0)return;if(document.getElementById('p-results')?.classList.contains('on'))showResults()},300)}
+function validateAndShow(){saveForm();const D=d();if(D.salary<=0||D.yrs<=0||D.age<=0){alert('Please fill in salary, years of service, and age.');return}showResults();show('results')}
+function resetForm(){if(!confirm('Clear all form data?'))return;$('salary').value='';$('years').value='';$('age').value='';$('notice').value='1';$('epfbal').value='';$('expenses').value='';$('contract').value='default';$('termtype').value='retrench';$('dependants').value='';$('state').value='KL';$('socso').checked=true;$('epf').checked=true;saveForm();localStorage.removeItem('kl-form');show('home',document.querySelector('.tb'));updateStateBudget()}
 
 /* ========== RESULTS ========== */
 function showResults(){
@@ -621,6 +627,7 @@ let sev=isDismiss?0:calcSev(D.salary,D.yrs,D.ct);
 let eis=(isMSS||isDismiss||!D.socso)?0:calcEIS(D.salary,D.yrs,D.socso);
 let epf=calcEPF(D.epf,D.epfbal,D.salary,D.yrs),np=noticePay(D.salary,D.notice);
 let tax=termTax(D.yrs,sev),total=sev+eis+epf+np-tax,run=D.expenses>0?total/D.expenses:NaN,tt=sev+eis+epf+np;
+let isSocsoElig=D.age<=60&&D.socso&&D.yrs>=0.5;
 let h=`<div class="ct" style="font-size:22px;margin-bottom:16px">${T.r_t}</div>`;
 let ctLabel=D.ct==='union'?T.co[1]:D.ct==='executive'?T.co[2]:T.co[0];
 let ttLabel=D.tt==='retrench'?T.to[0]:D.tt==='dismiss'?T.to[1]:T.to[2];
@@ -630,10 +637,10 @@ const rc=run>8?'g':run>4?'a':'r';
 h+=`<div class="st"><div class="sv" style="color:var(--${rc})">RM ${fmt(total)}</div><div class="sl">${T.r_ttl}</div><div class="su sg">After tax (RM ${fmt(tax)})</div></div>`;
 h+=`<div class="st"><div class="sv" style="color:var(--a)">RM ${fmt(sev)}</div><div class="sl">${T.r_sev}</div><div class="su sa">${actualRate} ${T.sev_label} ${D.yrs.toFixed(1)} ${T.yrs_label}</div></div>`;
 h+=`<div class="st"><div class="sv" style="color:var(--p)">RM ${fmt(eis)}</div><div class="sl">${T.r_eis}</div><div class="su sa">12 ${T.mo} × RM ${fmt(eis/12)}/${T.mo} (tapering)</div></div>`;
-h+=`<div class="st"><div class="sv" style="color:var(--am)">RM ${fmt(epf)}</div><div class="sl">${T.r_epf}</div><div class="su sa"></div></div></div>`;
+h+=`<div class="st"><div class="sv" style="color:var(--am)">RM ${fmt(epf)}</div><div class="sl">${T.r_epf}</div><div class="su sa">Sejahtera+Fleksibel (~25%)</div></div></div>`;
 h+=`<div class="g4" style="margin-bottom:16px"><div class="st"><div class="sv" style="color:var(--c)">RM ${fmt(np)}</div><div class="sl">${T.r_not}</div><div class="su sa">${D.notice} ${T.mop}</div></div>`;
 h+=`<div class="st"><div class="sv" style="color:var(--r)">RM ${fmt(D.expenses)}</div><div class="sl">${T.r_exp}</div></div>`;
-h+=`<div class="st"><div class="sv" style="color:var(--${rc})">${run.toFixed(1)} ${T.mop}</div><div class="sl">${T.r_run}</div><div class="su s${rc}">${run<=4?T.r_u:run>12?T.r_c:T.r_m}</div></div></div>`;
+h+=`<div class="st"><div class="sv" style="color:var(--${rc})">${isNaN(run)?'N/A':run.toFixed(1)} ${T.mop}</div><div class="sl">${T.r_run}</div><div class="su s${rc}">${isNaN(run)?'Enter monthly expenses':run<=4?T.r_u:run>12?T.r_c:T.r_m}</div></div></div>`;
 
 h+=`<div class="g2"><div class="cd"><div class="ct" style="margin-bottom:16px">${T.r_brk}</div>`;
 [{l:T.p_sev,v:sev,c:'var(--a)'},{l:T.p_eis,v:eis,c:'var(--p)'},{l:T.p_epf,v:epf,c:'var(--am)'},{l:T.p_not,v:np,c:'var(--c)'}].forEach(i=>{
@@ -656,6 +663,7 @@ else plans.push({t:'wrn',h:'💰 Tax: RM '+fmt(tax),b:'May be partially taxable.
 if(D.yrs<1)plans.push({t:'err',h:T.plan_srt,b:T.plan_srt_d});
 if(isDismiss)plans.push({t:'err',h:'⚠️ Dismissed = RM0',b:'Employment Act: misconduct = zero benefits. SOCSO/EIS eligible.'});
 if(isMSS)plans.push({t:'wrn',h:'⚠️ Voluntary — No EIS',b:'EIS pays only retrenchment. Check your letter.'});
+if(!isSocsoElig)plans.push({t:'err',h:'⚠️ EIS: Not eligible',b:'Need age ≤60 and 6 months SOCSO contribution in last 12 months.'});
 plans.push({t:'nfo',h:T.plan_dl,b:T.plan_dd.replace(/\n/g,'<br>')});
 plans.forEach(p=>{h+=`<div class="nb ${p.t}" style="margin-bottom:8px"><b>${p.h}</b><br><span style="font-size:13px">${p.b}</span></div>`;});
 h+=`</div>`;
@@ -705,7 +713,11 @@ render();
 show('home',document.querySelector('.tb'));
 }
 
+function toggleMode(){const d=document.documentElement;const isLight=d.dataset.mode==='light';d.dataset.mode=isLight?'':'light';$('modeBtn').textContent=isLight?'🌙':'☀️';localStorage.setItem('kl-mode',isLight?'':'light')}
+
 /* ============ INIT ============ */
+try{const mo=localStorage.getItem('kl-mode');if(mo==='light'){document.documentElement.dataset.mode='light';$('modeBtn').textContent='☀️'}}catch(e){}
+if(!document.documentElement.dataset.mode&&window.matchMedia?.('(prefers-color-scheme:light)').matches){document.documentElement.dataset.mode='light';$('modeBtn').textContent='☀️'}
 setLang(L);
 setTimeout(()=>{loadForm();updateStateBudget()},100);
 </script>
