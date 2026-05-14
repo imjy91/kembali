@@ -29,6 +29,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC','Not
 .il{display:block;font-size:13px;font-weight:500;color:var(--td);margin-bottom:4px}
 .inp{width:100%;background:var(--s2);border:1px solid var(--b);border-radius:10px;padding:11px 13px;color:var(--t);font-size:15px}
 .inp:focus{outline:none;border-color:var(--a)}
+.er{display:none;background:var(--rf);border:1px solid var(--rfb);border-radius:10px;padding:12px 14px;font-size:13px;margin:8px 0 4px;line-height:1.5}.er.on{display:block}
 .sel{width:100%;background:var(--s2);border:1px solid var(--b);border-radius:10px;padding:11px 13px;color:var(--t);font-size:15px;appearance:none;cursor:pointer}
 .ig2{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}
 .h{font-size:12px;color:var(--td);margin-top:3px}
@@ -565,7 +566,7 @@ html+=`<div class="ig2" style="margin-top:6px"><div><label class="ck"><input typ
 html+=`<div class="ig" style="margin-top:10px"><label class="il" for="epfbal">${T.f_b}</label><input class="inp" id="epfbal" type="number" min="0" placeholder="30000" oninput="autoCalc()"><div class="h">${T.f_hb}</div><div class="h" style="color:var(--pk)">💡 EPF 3 accounts (Jul 2024): Fleksibel (10%) withdrawable. Check i-Akaun.</div></div>`;
 html+=`<div class="ig"><label class="il" for="expenses">${T.f_ex}</label><input class="inp" id="expenses" type="number" min="0" placeholder="3000" oninput="autoCalc()"><div id="budget-hint" class="h" style="color:var(--am);font-weight:500"></div></div>`;
 html+=`<div class="ig2" style="margin-top:6px"><div class="ig"><label class="il" for="dependants">${T.f_dp}</label><select class="sel" id="dependants">${T.dp.map(x=>`<option>${x}</option>`).join('')}</select></div><div class="ig"><label class="il" for="state">${T.f_st}</label><select class="sel" id="state" onchange="updateStateBudget()"><option value="KL">${T.sp[0]}</option><option value="SEL">${T.sp[1]}</option><option value="JHR">${T.sp[2]}</option><option value="PNG">${T.sp[3]}</option><option value="other">${T.sp[4]}</option></select></div></div>`;
-html+=`<div style="display:flex;gap:8px;margin-top:6px"><button class="btn bp bbk" onclick="validateAndShow()">${T.cb}</button><button class="btn" style="background:var(--s3);color:var(--td);font-size:14px" onclick="resetForm()">↺ Reset</button></div></div></div>`;
+html+=`<div style="display:flex;gap:8px;margin-top:6px"><button class="btn bp bbk" onclick="validateAndShow()">${T.cb}</button><button class="btn" style="background:var(--s3);color:var(--td);font-size:14px" onclick="resetForm()">↺ Reset</button></div><div class="er" id="formErr"></div></div></div>`;
 
 /* RESULTS */
 html+=`<div class="pg" id="p-results"><div id="rc"></div></div>`;
@@ -614,6 +615,7 @@ document.getElementById('p-'+pg).classList.add('on');
 if(!el){document.querySelector(`.tb[data-p="${pg}"]`)?.classList.add('on');}
 else el.classList.add('on');
 if(pg==='results')showResults();
+if(pg==='calc')setTimeout(()=>$('salary')?.focus(),200);
 window.scrollTo({top:0,behavior:'smooth'});
 }
 
@@ -623,8 +625,8 @@ const CHK_KEYS=['socso','epf'];
 function saveForm(){const o={};FORM_KEYS.forEach(k=>{const el=$(k);if(el)o[k]=el.value});CHK_KEYS.forEach(k=>{const el=$(k);if(el)o[k]=el.checked});localStorage.setItem('kl-form',JSON.stringify(o))}
 function loadForm(){try{const o=JSON.parse(localStorage.getItem('kl-form')||'{}');o.salary&&($('salary').value=o.salary);o.years&&($('years').value=o.years);o.age&&($('age').value=o.age);o.notice!==undefined&&($('notice').value=o.notice);o.epfbal&&($('epfbal').value=o.epfbal);o.expenses&&($('expenses').value=o.expenses);o.contract&&($('contract').value=o.contract);o.termtype&&($('termtype').value=o.termtype);o.dependants!==undefined&&($('dependants').value=o.dependants);o.state&&($('state').value=o.state);o.socso!==undefined&&($('socso').checked=o.socso);o.epf!==undefined&&($('epf').checked=o.epf)}catch(e){}}
 let _acTimer=null;
-function autoCalc(){saveForm();clearTimeout(_acTimer);_acTimer=setTimeout(()=>{const D=d();if(D.salary<=0||D.yrs<=0)return;if(document.getElementById('p-results')?.classList.contains('on'))showResults()},300)}
-function validateAndShow(){saveForm();const D=d();if(D.salary<=0||D.yrs<=0||D.age<=0){alert('Please fill in salary, years of service, and age.');return}showResults();show('results')}
+function autoCalc(){saveForm();clearTimeout(_acTimer);_acTimer=setTimeout(()=>{const D=d();if(D.salary<=0||D.yrs<=0)return;const ee=$('formErr');if(ee)ee.classList.remove('on');if(document.getElementById('p-results')?.classList.contains('on'))showResults()},300)}
+function validateAndShow(){saveForm();const D=d();let err='';if(D.salary<=0)err+='Please enter your monthly salary.<br>';if(D.yrs<=0)err+='Please enter years of service.<br>';if(D.age<=0)err+='Please enter your age.';const ee=$('formErr');if(err){ee.innerHTML='⚠️ '+err;ee.classList.add('on');return}else{ee.classList.remove('on');ee.innerHTML=''}showResults();show('results')}
 function resetForm(){if(!confirm('Clear all form data?'))return;$('salary').value='';$('years').value='';$('age').value='';$('notice').value='1';$('epfbal').value='';$('expenses').value='';$('contract').value='default';$('termtype').value='retrench';$('dependants').value='';$('state').value='KL';$('socso').checked=true;$('epf').checked=true;saveForm();localStorage.removeItem('kl-form');show('home',document.querySelector('.tb'));updateStateBudget()}
 
 /* ========== RESULTS ========== */
@@ -677,11 +679,11 @@ plans.push({t:'nfo',h:T.plan_dl,b:T.plan_dd.replace(/\n/g,'<br>')});
 plans.forEach(p=>{h+=`<div class="nb ${p.t}" style="margin-bottom:8px"><b>${p.h}</b><br><span style="font-size:13px">${p.b}</span></div>`;});
 h+=`</div>`;
 
-h+=`<div class="cd" style="margin-top:16px"><div class="ct" style="margin-bottom:12px">${T.r_cl}</div>`;
+h+=`<div class="cd" style="margin-top:16px"><div class="ct" style="margin-bottom:12px">${T.r_cl}</div><div style="font-size:12px;color:var(--td);margin-bottom:10px;cursor:pointer" onclick="toggleAllChecks()">📌 Expand all / Collapse all</div>`;
 T.ch.forEach((t,i)=>{h+=`<div class="cli" onclick="this.classList.toggle('open')"><input type="checkbox" onclick="event.stopPropagation();this.closest('.cli').classList.toggle('done')"><div class="cx"><div class="cxh">${t}</div><div class="cxd">${T.chd[i]}</div></div></div>`;});
 h+=`</div>`;
 
-h+=`<div class="cd" style="margin-top:16px;text-align:center"><div class="ct">${T.r_sh}</div><p style="font-size:14px;color:var(--td);margin:10px 0">${T.r_shd}</p><button class="btn bp" onclick="window.print()">${T.r_p}</button></div>`;
+h+=`<div class="cd" style="margin-top:16px;text-align:center"><div class="ct">${T.r_sh}</div><p style="font-size:14px;color:var(--td);margin:10px 0">${T.r_shd}</p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><button class="btn bp" onclick="window.print()">${T.r_p}</button><button class="btn" style="background:var(--s3);color:var(--t);" onclick="copyResults()">📋 Copy Results</button></div></div>`;
 h+=`<div class="nb nfo" style="margin-top:12px;font-size:12px">⚠ ${T.disclaimer}</div>`;
 
 document.getElementById('rc').innerHTML=h;
@@ -721,6 +723,10 @@ localStorage.setItem('kl-lang',v);
 render();
 show('home',document.querySelector('.tb'));
 }
+
+let _chkExpanded=false;
+function toggleAllChecks(){_chkExpanded=!_chkExpanded;document.querySelectorAll('#rc .cli').forEach(c=>c.classList.toggle('open',_chkExpanded))}
+function copyResults(){const r=$('rc');if(!r)return;let t='📊 KEMBALI — RETRENCHMENT SUMMARY\n'+'='.repeat(35)+'\n';const cards=r.querySelectorAll('.st');cards.forEach(c=>{const v=c.querySelector('.sv')?.textContent||'';const l=c.querySelector('.sl')?.textContent||'';const s=c.querySelector('.su')?.textContent||'';if(l&&v)t+=`${l}: ${v}  ${s}\n`;});t+='\n'+(r.querySelector('.nb.ok')?.textContent||'')+'\n\n🏠 kembali.imjy91.github.io';navigator.clipboard.writeText(t).then(()=>{const b=$('rc')?.querySelector('.btn:last-child');if(b){b.textContent='✅ Copied!';b.style.background='var(--g)';setTimeout(()=>{b.textContent='📋 Copy Results';b.style.background=''},2000)}}).catch(()=>{prompt('Copy this manually:',t)})}
 
 function toggleMode(){const d=document.documentElement;const isLight=d.dataset.mode==='light';d.dataset.mode=isLight?'':'light';$('modeBtn').textContent=isLight?'🌙':'☀️';localStorage.setItem('kl-mode',isLight?'':'light')}
 
