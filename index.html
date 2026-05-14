@@ -633,7 +633,7 @@ const T=_T[L]||_T.en,D=d();
 const actualRate=sevRate(D.yrs)+(D.ct==='union'?5:D.ct==='executive'?8:0);
 const isDismiss=D.tt==='dismiss',isMSS=D.tt==='mutual';
 let sev=isDismiss?0:calcSev(D.salary,D.yrs,D.ct);
-let eis=(isMSS||!D.socso)?0:calcEIS(D.salary,D.yrs,D.socso);
+let eis=(isMSS||!D.socso||D.age>60||D.yrs<0.5)?0:calcEIS(D.salary,D.yrs,D.socso);
 let epf=calcEPF(D.epf,D.epfbal,D.salary,D.yrs),np=noticePay(D.salary,D.notice);
 let tax=termTax(D.yrs,sev),total=sev+eis+epf+np-tax,run=D.expenses>0?total/D.expenses:NaN,tt=sev+eis+epf+np;
 let isSocsoElig=D.age<=60&&D.socso&&D.yrs>=0.5;
