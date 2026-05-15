@@ -472,7 +472,7 @@ cv5:"'பிரிவினை' — புரிந்து கொள்ள.",
 cv6:"EIS கடந்த 12 மாதங்களில் 6 மாத SOCSO பங்களிப்பு தேவை",
 cv7:"EIS வயது ≤60 தேவை",
 he_t:"🆘 உதவி",
-gh:"📞 ாட்லைன்",
+gh:"📞 ஹாட்லைன்",
 gh1:"SOCSO",gh1d:"1-300-22-8000",
 gh2:"JTM",gh2d:"1-300-88-5555",
 gh3:"Talian Kasih",gh3d:"15999",
@@ -516,8 +516,8 @@ disclaimer:"அனைத்து மதிப்புகளும் மதி
 function fmt(n){try{return Number(n).toLocaleString('en-MY',{minimumFractionDigits:0,maximumFractionDigits:0})}catch(e){return Math.round(n).toString()}}
 function sevRate(y){return y<=2?10:y<=5?15:20}
 function calcSev(s,y,ct){let d=s/26,r=sevRate(y);if(ct==='union')r=Math.min(r+5,25);if(ct==='executive')r=Math.min(r+8,30);return Math.round(r*y*d)}
-function calcEIS(s,y,on){if(!on)return 0;let m=Math.min(s,5e3),b1=y<5?.8:.7,m1=Math.min(m*b1,1360),b2=y<5?.7:.6,m2=Math.min(m*b2,1360),b3=y<5?.6:.5,m3=Math.min(m*b3,1360);return Math.round(m1*3+m2*3+m3*6)}
-function calcEPF(on,bal,s,y){if(!on)return 0;if(bal>0)return Math.round(bal*.25);let emp=s>5e3?12:13,ee=11,t=0;for(let i=0;i<Math.round(y);i++)t+=(emp+ee)/100*s*12*1.046;return Math.round(t*.25)}
+function calcEIS(s,y,on){if(!on)return 0;let m=Math.min(s,5e3),b1=y<5?.8:.7,m1=Math.min(m*b1,1360),b2=y<5?.7:.6,m2=Math.min(m*b2,1360);return Math.round(m1*3+m2*3)}
+function calcEPF(on,bal,s,y){if(!on)return 0;if(bal>0)return Math.round(bal*.25);let emp=s>5e3?12:13,ee=11,t=0;for(let i=0;i<Math.round(Math.max(y,1));i++)t=(t+(emp+ee)/100*s*12)*1.055;return Math.round(t*.25)}
 function termTax(y,sev){let ex=y*1e4;if(sev<=ex)return 0;let tx=sev-ex;if(tx<=5e3)return 0;if(tx<=2e4)return Math.round((tx-5e3)*.01);if(tx<=35e3)return Math.round(150+(tx-2e4)*.03);if(tx<=1e5)return Math.round(600+(tx-35e3)*.06);if(tx<=25e4)return Math.round(4500+(tx-1e5)*.11);if(tx<=5e5)return Math.round(21000+(tx-25e4)*.19);if(tx<=1e6)return Math.round(68500+(tx-5e5)*.25);if(tx<=25e5)return Math.round(118500+(tx-1e6)*.26);return Math.round(424500+(tx-25e5)*.28)}
 function noticePay(s,n){return Math.round(s*n)}
 
@@ -561,7 +561,7 @@ html+=`</div></div></div><div class="nb ok">${T.priv}</div></div>`;
 
 /* CALC */
 html+=`<div class="pg" id="p-calc"><div class="ct" style="font-size:22px;margin-bottom:4px">${T.calc_t}</div><div class="cd"><div class="ig2"><div class="ig"><label class="il" for="salary">${T.f_sal}</label><input class="inp" id="salary" type="number" min="0" placeholder="5000" oninput="autoCalc()"></div><div class="ig"><label class="il" for="years">${T.f_yrs}</label><input class="inp" id="years" type="number" min="0" placeholder="5" step="0.1" oninput="autoCalc()"></div><div class="ig"><label class="il" for="age">${T.f_age}</label><input class="inp" id="age" type="number" min="0" placeholder="35" oninput="autoCalc()"></div><div class="ig"><label class="il" for="notice">${T.f_not}</label><input class="inp" id="notice" type="number" min="0" value="1" max="6" oninput="autoCalc()"></div></div>`;
-html+=`<div class="ig2" style="margin-top:6px"><div class="ig"><label class="il" for="contract">${T.f_ct}</label><select class="sel" id="contract" onchange="autoCalc()"><option value="default">${T.co[0]}</option><option value="union">${T.co[1]}</option><option value="executive">${T.co[2]}</option></select></div><div class="ig"><label class="il" for="termtype">${T.f_tt}</label><select class="sel" id="termtype"><option value="retrench">${T.to[0]}</option><option value="dismiss">${T.to[1]}</option><option value="mutual">${T.to[2]}</option></select></div></div>`;
+html+=`<div class="ig2" style="margin-top:6px"><div class="ig"><label class="il" for="contract">${T.f_ct}</label><select class="sel" id="contract" onchange="autoCalc()"><option value="default">${T.co[0]}</option><option value="union">${T.co[1]}</option><option value="executive">${T.co[2]}</option></select></div><div class="ig"><label class="il" for="termtype">${T.f_tt}</label><select class="sel" id="termtype" onchange="autoCalc()"><option value="retrench">${T.to[0]}</option><option value="dismiss">${T.to[1]}</option><option value="mutual">${T.to[2]}</option></select></div></div>`;
 html+=`<div class="ig2" style="margin-top:6px"><div><label class="ck"><input type="checkbox" id="socso" checked onchange="autoCalc()">${T.f_sc}</label></div><div><label class="ck"><input type="checkbox" id="epf" checked onchange="autoCalc()">${T.f_ec}</label></div></div>`;
 html+=`<div class="ig" style="margin-top:10px"><label class="il" for="epfbal">${T.f_b}</label><input class="inp" id="epfbal" type="number" min="0" placeholder="30000" oninput="autoCalc()"><div class="h">${T.f_hb}</div><div class="h" style="color:var(--pk)">💡 EPF 3 accounts (Jul 2024): Fleksibel (10%) withdrawable. Check i-Akaun.</div></div>`;
 html+=`<div class="ig"><label class="il" for="expenses">${T.f_ex}</label><input class="inp" id="expenses" type="number" min="0" placeholder="3000" oninput="autoCalc()"><div id="budget-hint" class="h" style="color:var(--am);font-weight:500"></div></div>`;
@@ -635,10 +635,10 @@ const T=_T[L]||_T.en,D=d();
 const actualRate=sevRate(D.yrs)+(D.ct==='union'?5:D.ct==='executive'?8:0);
 const isDismiss=D.tt==='dismiss',isMSS=D.tt==='mutual';
 let sev=isDismiss?0:calcSev(D.salary,D.yrs,D.ct);
-let eis=(isMSS||!D.socso||D.age>60||D.yrs<0.5)?0:calcEIS(D.salary,D.yrs,D.socso);
+let eis=(isMSS||isDismiss||!D.socso||D.age>60||D.yrs<0.5)?0:calcEIS(D.salary,D.yrs,D.socso);
 let epf=calcEPF(D.epf,D.epfbal,D.salary,D.yrs),np=noticePay(D.salary,D.notice);
 let tax=termTax(D.yrs,sev),total=sev+eis+epf+np-tax,run=D.expenses>0?total/D.expenses:NaN,tt=sev+eis+epf+np;
-let isSocsoElig=D.age<=60&&D.socso&&D.yrs>=0.5;
+let isSocsoElig=D.age<=60&&D.socso&&D.yrs>=0.5&&!isDismiss;
 let h=`<div class="ct" style="font-size:22px;margin-bottom:16px">${T.r_t}</div>`;
 let ctLabel=D.ct==='union'?T.co[1]:D.ct==='executive'?T.co[2]:T.co[0];
 let ttLabel=D.tt==='retrench'?T.to[0]:D.tt==='dismiss'?T.to[1]:T.to[2];
@@ -647,7 +647,7 @@ h+=`<div class="g4" style="margin-bottom:16px">`;
 const rc=run>8?'g':run>4?'a':'r';
 h+=`<div class="st"><div class="sv" style="color:var(--${rc})">RM ${fmt(total)}</div><div class="sl">${T.r_ttl}</div><div class="su sg">After tax (RM ${fmt(tax)})</div></div>`;
 h+=`<div class="st"><div class="sv" style="color:var(--a)">RM ${fmt(sev)}</div><div class="sl">${T.r_sev}</div><div class="su sa">${actualRate} ${T.sev_label} ${D.yrs.toFixed(1)} ${T.yrs_label}</div></div>`;
-h+=`<div class="st"><div class="sv" style="color:var(--p)">RM ${fmt(eis)}</div><div class="sl">${T.r_eis}</div><div class="su sa">12 ${T.mo} × RM ${fmt(eis/12)}/${T.mo} (tapering)</div></div>`;
+h+=`<div class="st"><div class="sv" style="color:var(--p)">RM ${fmt(eis)}</div><div class="sl">${T.r_eis}</div><div class="su sa">6 ${T.mop} × RM ${fmt(eis/6||0)}/${T.mo} (tapering)</div></div>`;
 h+=`<div class="st"><div class="sv" style="color:var(--am)">RM ${fmt(epf)}</div><div class="sl">${T.r_epf}</div><div class="su sa">Sejahtera+Fleksibel (~25%)</div></div></div>`;
 h+=`<div class="g4" style="margin-bottom:16px"><div class="st"><div class="sv" style="color:var(--c)">RM ${fmt(np)}</div><div class="sl">${T.r_not}</div><div class="su sa">${D.notice} ${T.mop}</div></div>`;
 h+=`<div class="st"><div class="sv" style="color:var(--r)">RM ${fmt(D.expenses)}</div><div class="sl">${T.r_exp}</div></div>`;
@@ -660,7 +660,7 @@ h+=`<div style="margin-bottom:10px"><div style="display:flex;justify-content:spa
 });
 h+=`</div><div><div class="cd" style="margin-bottom:16px"><div class="ct" style="margin-bottom:16px">${T.r_tl}</div><div class="tl">`;
 h+=mkTl(1,T.r_t1,`RM ${fmt(sev)} + RM ${fmt(np)} — ${T.r_t1d}`,'var(--g)'),
-h+=mkTl(1,T.r_t2,`RM ${fmt(eis/12)}/${T.mo} × 12 — ${T.r_t2d}`,'var(--am)'),
+h+=mkTl(1,T.r_t2,`RM ${fmt(eis/6||0)}/${T.mo} × 6 — ${T.r_t2d}`,'var(--am)'),
 h+=mkTl(1,T.r_t3,`RM ${fmt(epf)} — ${T.r_t3d}`,'var(--p)');
 h+=`</div></div></div></div>`;
 
@@ -672,7 +672,7 @@ else plans.push({t:'ok',h:T.plan_ok,b:T.plan_ok_d});
 if(tax<=0)plans.push({t:'ok',h:T.plan_tax,b:T.plan_tax_d});
 else plans.push({t:'wrn',h:'💰 Tax: RM '+fmt(tax),b:'May be partially taxable.'});
 if(D.yrs<1)plans.push({t:'err',h:T.plan_srt,b:T.plan_srt_d});
-if(isDismiss)plans.push({t:'err',h:'⚠️ Dismissed = Zero Severance',b:'Misconduct = no severance or notice pay. But SOCSO/EIS benefits still available if you contributed.'});
+if(isDismiss)plans.push({t:'err',h:'⚠️ Dismissed = No Severance or EIS',b:'Section 18(a) EIS Act 2017: misconduct dismissal disqualifies from EIS. No severance per JTAS. Notice pay may still apply. Check your termination letter.'});
 if(isMSS)plans.push({t:'wrn',h:'⚠️ Voluntary — No EIS',b:'EIS pays only retrenchment. Check your letter.'});
 if(!isSocsoElig)plans.push({t:'err',h:'⚠️ EIS: Not eligible',b:'Need age ≤60 and 6 months SOCSO contribution in last 12 months.'});
 plans.push({t:'nfo',h:T.plan_dl,b:T.plan_dd.replace(/\n/g,'<br>')});
